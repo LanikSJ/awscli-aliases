@@ -8,9 +8,9 @@ aws cli ``1.11.24`` or higher:
 ##Usage
 
 ```
-$ git clone https://github.com/LanikSJ/aws-alias
+$ git clone https://github.com/LanikSJ/awscli-aliases
 $ mkdir -p ~/.aws/cli
-$ ln -sf aws-alias/alias ~/.aws/cli/alias
+$ ln -sf awscli-aliases/alias ~/.aws/cli/alias
 ```
 ##Test
 
