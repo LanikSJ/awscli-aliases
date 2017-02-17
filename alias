@@ -1,0 +1,29 @@
+[toplevel]
+
+whoami = sts get-caller-identity
+
+# Instance ID from Name
+id = !f() { aws ec2 describe-instances --query Reservations[*].Instances[*].InstanceId --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --output text; }; f
+
+# Instance DNS from ID
+idns = !f() { aws ec2 describe-instances --instance-ids ${1} --query 'Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddresses[].PrivateDnsName' --output text; }; f
+
+# Instance Name from Instance ID
+iname = !f() { aws ec2 describe-instances --instance-ids ${1} --query 'Reservations[].Instances[].Tags[?Key==`Name`].Value' --output text; }; f
+
+get-group-id = !f() { aws ec2 describe-security-groups --filters Name=group-name,Values=${1} --query SecurityGroups[0].GroupId --output text; }; f
+
+# Instance DNS from Private IP
+ghost = !f() { aws ec2 describe-instances --query 'Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddresses[].PrivateDnsName' --filters Name=network-interface.addresses.private-ip-address,Values=${1} --output text; }; f
+
+# List or Set Your Region
+region = !f() { [[ $# -eq 1 ]] && aws configure set region "$1" || aws configure get region; }; f
+
+running-instances = ec2 describe-instances \
+    --filter Name=instance-state-name,Values=running \
+    --output table \
+    --query 'Reservations[].Instances[].{ID: InstanceId,Hostname: PublicDnsName,Name: Tags[?Key==`Name`].Value | [0],Type: InstanceType, Platform: Platform || `Linux`}'
+
+ebs-volumes = ec2 describe-volumes \
+    --query 'Volumes[].{VolumeId: VolumeId,State: State,Size: Size,Name: Tags[0].Value,AZ: AvailabilityZone}' \
+    --output table
