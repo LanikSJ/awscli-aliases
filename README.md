@@ -8,9 +8,10 @@ aws cli ``1.11.24`` or higher:
 ##Usage
 
 ```
+$ mkdir -p GitHub; cd GitHub
 $ git clone https://github.com/LanikSJ/awscli-aliases
 $ mkdir -p ~/.aws/cli
-$ ln -sf awscli-aliases/alias ~/.aws/cli/alias
+$ ln -sf ~/GitHub/awscli-aliases/alias ~/.aws/cli/alias
 ```
 ##Test
 
