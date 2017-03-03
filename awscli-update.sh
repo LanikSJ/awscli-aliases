@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
-AWSVERSION=$(aws --version |awk -F"/" '{print $2}' |sed 's/ Python//')
-
-if [[ $AWSVERSION < '1.11.24' ]]; then
-  echo "Your version of AWS CLI is out of date"
+# Install / Update Function
+update_awscli() {
   case `uname` in
   "Darwin" )
   	type brew
-  	if [ $? -ne 0 ]
+  	if [ $? != 0 ]
   	then
   		echo "brew not found. Please install at http://brew.sh"
   		exit 1
@@ -16,11 +14,11 @@ if [[ $AWSVERSION < '1.11.24' ]]; then
   	fi
 
     type python3
-  	if [ $? -ne 0 ]
+  	if [ $? != 0 ]
   	then
   		echo "python3 not found. Installing.."
   		brew install python3
-  		if [ $? -ne 0 ]
+  		if [ $? != 0 ]
   		then
   			echo "Failed to install python3.."
   			exit 1
@@ -30,7 +28,7 @@ if [[ $AWSVERSION < '1.11.24' ]]; then
   	fi
 
   	type pip3
-  	if [ $? -ne 0 ]
+  	if [ $? != 0 ]
   	then
   		echo "pip3 not found. Please correct."
   		exit 1
@@ -39,9 +37,9 @@ if [[ $AWSVERSION < '1.11.24' ]]; then
   	fi
 
     pip3 show awscli
-    if [ $? -ne 0 ]
+    if [ $? != 0 ]
     then
-      echo "You're not using pip. "
+      echo "You're not using pip. Installing using Brew... "
       brew install awscli
     else
       echo "awscli already installed using pip, upgrading..."
@@ -57,6 +55,19 @@ if [[ $AWSVERSION < '1.11.24' ]]; then
   	exit 1
   ;;
   esac
+}
+
+# Variables
+AWSVERSION=$(aws --version |awk -F"/" '{print $2}' |sed 's/ Python//')
+
+if [[ -z $AWSVERSION ]]; then
+  echo "AWS CLI isn't installed. "
+  update_awscli
+fi
+
+if [[ $AWSVERSION < '1.11.24' ]]; then
+  echo "Your version of AWS CLI is out of date! Updating ... "
+  update_awscli
 else
   echo "Your version of AWS CLI is up to date! Nothing to do. "
 fi
