@@ -5,7 +5,7 @@
 aws cli ``1.11.24`` or higher:
 [AWS CLI User Guide](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
 
-Use ``update_awscli.sh`` script to install / update AWS CLI if yours is out of date.
+Use ``update_awscli.sh`` script to install / update AWS CLI if yours is out of date. Use ``aws --version`` to verify.
 
 ##Usage
 
