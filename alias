@@ -30,6 +30,9 @@ ip-dns = !f() { aws ec2 describe-instances --query 'Reservations[].Instances[].N
 # List or Set Your Region
 region = !f() { [[ $# -eq 1 ]] && aws configure set region "$1" || aws configure get region; }; f
 
+# List VPC Peers
+vpc-peers = !f() { aws ec2 describe-vpc-peering-connections --filters Name=tag:Name,Values=${1} --query VpcPeeringConnections[].Tags[].Value; }; f
+
 running-instances = ec2 describe-instances \
     --filter Name=instance-state-name,Values=running \
     --output table \
