@@ -33,11 +33,12 @@ ip-dns = !f() { aws ec2 describe-instances --query 'Reservations[].Instances[].N
 # List or Set Your Region
 region = !f() { [[ $# -eq 1 ]] && aws configure set region "$1" || aws configure get region; }; f
 
-# List VPC Peers
-vpc-peers = !f() { aws ec2 describe-vpc-peering-connections --filters Name=tag:Name,Values=${1} --query VpcPeeringConnections[].Tags[].Value; }; f
-
 # List Network ACLs
 net-acls = !f() { aws ec2 describe-network-acls --network-acl-ids ${1} --query NetworkAcls[].Entries; }; f
+
+# List VPC Peers
+vpc-peers = ec2 describe-vpc-peering-connections \
+  --query 'VpcPeeringConnections[].Tags[].Value'
 
 running-instances = ec2 describe-instances \
     --filter Name=instance-state-name,Values=running \
