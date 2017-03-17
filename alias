@@ -11,6 +11,9 @@ id-dns = !f() { aws ec2 describe-instances --instance-ids ${1} --query 'Reservat
 # Instance Name from Instance ID
 id-name = !f() { aws ec2 describe-instances --instance-ids ${1} --query 'Reservations[].Instances[].Tags[?Key==`Name`].Value' --output text; }; f
 
+# Instance KeyName from Instance ID
+id-key = !f() { aws ec2 describe-instances --instance-ids ${1} --query Reservations[].Instances[].KeyName --output text; }; f
+
 # Instance ID from DNS Name
 dns-id = !f() { aws ec2 describe-instances --filters Name=private-dns-name,Values=${1} --query Reservations[*].Instances[*].InstanceId --output text; }; f
 
