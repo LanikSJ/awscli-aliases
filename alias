@@ -3,7 +3,7 @@
 whoami = sts get-caller-identity
 
 # Instance ID from Name
-name-id = !f() { aws ec2 describe-instances --query Reservations[*].Instances[*].InstanceId --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --output text; }; f
+name-id = !f() { aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId' --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --output text; }; f
 
 # Instance DNS from ID
 id-dns = !f() { aws ec2 describe-instances --instance-ids ${1} --query 'Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddresses[].PrivateDnsName' --output text; }; f
@@ -12,14 +12,14 @@ id-dns = !f() { aws ec2 describe-instances --instance-ids ${1} --query 'Reservat
 id-name = !f() { aws ec2 describe-instances --instance-ids ${1} --query 'Reservations[].Instances[].Tags[?Key==`Name`].Value' --output text; }; f
 
 # Instance KeyName from Instance ID
-id-key = !f() { aws ec2 describe-instances --instance-ids ${1} --query Reservations[].Instances[].KeyName --output text; }; f
+id-key = !f() { aws ec2 describe-instances --instance-ids ${1} --query 'Reservations[].Instances[].KeyName' --output text; }; f
 
 # Instance ID from DNS Name
-dns-id = !f() { aws ec2 describe-instances --filters Name=private-dns-name,Values=${1} --query Reservations[*].Instances[*].InstanceId --output text; }; f
+dns-id = !f() { aws ec2 describe-instances --filters Name=private-dns-name,Values=${1} --query 'Reservations[].Instances[].InstanceId' --output text; }; f
 
-get-group-id = !f() { aws ec2 describe-security-groups --filters Name=group-name,Values=${1} --query SecurityGroups[0].GroupId --output text; }; f
+get-group-id = !f() { aws ec2 describe-security-groups --filters Name=group-name,Values=${1} --query 'SecurityGroups[].GroupId' --output text; }; f
 
-get-group-rules = !f() { aws ec2 describe-security-groups --group-ids ${1} --query SecurityGroups[].IpPermissions; }; f
+get-group-rules = !f() { aws ec2 describe-security-groups --group-ids ${1} --query 'SecurityGroups[].IpPermissions'; }; f
 
 # Instance Name from Instance DNS
 name-dns = !f() { aws ec2 describe-instances --filters Name=tag:Name,Values=${1} Name=instance-state-name,Values=running --query 'Reservations[].Instances[].PrivateDnsName' --output text; }; f
@@ -37,7 +37,7 @@ ip-dns = !f() { aws ec2 describe-instances --query 'Reservations[].Instances[].N
 region = !f() { [[ $# -eq 1 ]] && aws configure set region "$1" || aws configure get region; }; f
 
 # List Network ACLs
-net-acls = !f() { aws ec2 describe-network-acls --network-acl-ids ${1} --query NetworkAcls[].Entries; }; f
+net-acls = !f() { aws ec2 describe-network-acls --network-acl-ids ${1} --query 'NetworkAcls[].Entries'; }; f
 
 # List VPC Peers
 vpc-peers = ec2 describe-vpc-peering-connections \
