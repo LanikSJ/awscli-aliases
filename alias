@@ -36,6 +36,9 @@ ip-name = !f() { aws ec2 describe-instances --filters Name=network-interface.add
 # Instance DNS from Private IP
 ip-dns = !f() { aws ec2 describe-instances --query 'Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddresses[].PrivateDnsName' --filters Name=network-interface.addresses.private-ip-address,Values=${1} --output text; }; f
 
+# List Image ID for an Instance ID
+image-id = !f() { aws ec2 describe-instances --instance-ids ${1} --query 'Reservations[].Instances[].ImageId' --output text; }; f
+
 # List or Set Your Region
 region = !f() { [[ $# -eq 1 ]] && aws configure set region "$1" || aws configure get region; }; f
 
