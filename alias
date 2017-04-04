@@ -50,19 +50,25 @@ region = !f() { [[ $# -eq 1 ]] && aws configure set region "$1" || aws configure
 # List Network ACLs
 net-acls = !f() { aws ec2 describe-network-acls --network-acl-ids ${1} --query 'NetworkAcls[].Entries'; }; f
 
+# List IAM Access Keys
+iam-keys = !f() {  for user in $(aws iam list-users --output text | awk '{print $NF}'); do aws iam list-access-keys --user $user --output text; done; }; f
+
 # List VPC Peers
 vpc-peers = ec2 describe-vpc-peering-connections \
   --query 'VpcPeeringConnections[].Tags[].Value'
 
+# List EC2 Instances
 running-instances = ec2 describe-instances \
     --filter Name=instance-state-name,Values=running \
     --output table \
     --query 'Reservations[].Instances[].{ID: InstanceId,Hostname: PublicDnsName,Name: Tags[?Key==`Name`].Value | [0],Type: InstanceType, Platform: Platform || `Linux`}'
 
+# List EC2 Volumes
 ebs-volumes = ec2 describe-volumes \
     --query 'Volumes[].{VolumeId: VolumeId,State: State,Size: Size,Name: Tags[0].Value,AZ: AvailabilityZone}' \
     --output table
 
+# List EC2 Security Groups
 open-security-groups = ec2 describe-security-groups \
     --filters "Name=ip-permission.to-port,Values=22"  \
     --query 'SecurityGroups[?length(IpPermissions[?ToPort==`22` && contains(IpRanges[].CidrIp, `0.0.0.0/0`)]) > `0`].{GroupName: GroupName, TagName: Tags[?Key==`Name`].Value | [0]}' \
