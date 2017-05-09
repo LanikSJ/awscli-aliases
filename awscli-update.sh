@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Install / Update Function
-update_awscli() {
+awscli() {
   case `uname` in
     "Darwin" )
       type brew
@@ -39,7 +39,7 @@ update_awscli() {
       pip3 show awscli
       if [ $? != 0 ]
       then
-        echo "You're not using pip. Installing using Brew... "
+        echo "AWS CLI not installed using pip. Installing/Updating AWS CLI using Brew... "
         brew install awscli
       else
         echo "awscli already installed using pip, upgrading..."
@@ -51,23 +51,29 @@ update_awscli() {
       exit 1
     ;;
     * )
-      echo `uname` "is an unsupported OS. Please manually install  / update AWS CLI. "
+      echo "`uname` is an unsupported OS. Please manually install / update AWS CLI. "
       exit 1
     ;;
   esac
 }
 
+# Write out AWS CLI version number
+aws --version 2>/tmp/version.txt 1>&2
+
 # Variables
-AWSVERSION=$(aws --version |awk -F"/" '{print $2}' |sed 's/ Python//')
+AWSVERSION=$(cat /tmp/version.txt |awk -F"/" '{print $2}' |sed 's/ Python//')
+
+echo "Your AWS CLI version is: $AWSVERSION"
 
 if [[ -z $AWSVERSION ]]; then
   echo "AWS CLI isn't installed. Installing ... "
-  update_awscli
+  awscli && rm -f /tmp/version.txt
 fi
 
 if [[ $AWSVERSION < '1.11.24' ]]; then
   echo "Your version of AWS CLI is out of date! Updating ... "
-  update_awscli
+  awscli && rm -f /tmp/version.txt
 else
   echo "Your version of AWS CLI is up to date! Nothing to do. "
+  rm -f /tmp/version.txt
 fi
