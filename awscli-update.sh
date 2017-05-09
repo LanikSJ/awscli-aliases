@@ -47,7 +47,7 @@ awscli() {
       fi
     ;;
     Linux )
-      echo  "For Linux systems, please manually install / update AWS CLI. "
+      echo "For Linux systems, please manually install / update AWS CLI. "
       exit 1
     ;;
     * )
