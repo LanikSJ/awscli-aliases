@@ -59,6 +59,24 @@ net-acls = !f() { aws ec2 describe-network-acls --network-acl-ids ${1} --query '
 # List IAM Access Keys
 iam-keys = !f() {  for user in $(aws iam list-users --output text | awk '{print $NF}'); do aws iam list-access-keys --user $user --output text; done; }; f
 
+# Docker ECR Login
+ecr-login =
+  !f() {
+    region=$(aws configure get region)
+    endpoint=$(aws ecr get-authorization-token --region $region --output text --query 'authorizationData[].proxyEndpoint')
+    passwd=$(aws ecr get-authorization-token --region $region --output text --query 'authorizationData[].authorizationToken' | base64 --decode | cut -d: -f2)
+    docker login -u AWS -p $passwd $endpoint
+  }; f
+
+# Instance Size by Name
+instance-size =
+  !f() {
+	instances=$(aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId' --filters "Name=tag:Name,Values='${1}'" --output text)
+    aws ec2 describe-instances --instance-ids $instances --filters 'Name=instance-state-name,Values=running' \
+    --query 'Reservations[].Instances[].{Name: Tags[?Key==`Name`].Value | [0],Size:InstanceType,ID:InstanceId}' \
+    --output table
+  }; f
+
 # List VPC Peers
 vpc-peers = ec2 describe-vpc-peering-connections \
   --query 'VpcPeeringConnections[].Tags[].Value'
