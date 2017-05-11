@@ -71,7 +71,7 @@ ecr-login =
 # Instance Size by Name
 instance-size =
   !f() {
-	instances=$(aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId' --filters "Name=tag:Name,Values='${1}'" --output text)
+    instances=$(aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId' --filters "Name=tag:Name,Values='${1}'" --output text)
     aws ec2 describe-instances --instance-ids $instances --filters 'Name=instance-state-name,Values=running' \
     --query 'Reservations[].Instances[].{Name: Tags[?Key==`Name`].Value | [0],Size:InstanceType,ID:InstanceId}' \
     --output table
