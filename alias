@@ -8,6 +8,9 @@ name-id = !f() { aws ec2 describe-instances --query 'Reservations[].Instances[].
 # Instance DNS from ID
 id-dns = !f() { aws ec2 describe-instances --instance-ids ${1} --query 'Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddresses[].PrivateDnsName' --output text; }; f
 
+# Instance ENI from ID
+id-eni = !f() { aws ec2 describe-instances --instance-ids ${1} --query 'Reservations[].Instances[].NetworkInterfaces[].NetworkInterfaceId' --output text; }; f
+
 # Instance Name from Instance ID
 id-name = !f() { aws ec2 describe-instances --instance-ids ${1} --query 'Reservations[].Instances[].Tags[?Key==`Name`].Value' --output text; }; f
 
