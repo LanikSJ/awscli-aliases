@@ -1,4 +1,4 @@
-# aws-alias
+# AWS CLI Aliases
 
 ## Requirements
 
