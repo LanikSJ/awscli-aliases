@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# This script will install/Update AWS CLI
 
 # Install / Update Function
 awscli() {
@@ -43,7 +44,7 @@ awscli() {
         brew install awscli
       else
         echo "awscli already installed using pip, upgrading..."
-        pip3 install -U awscli
+        pip3 install awscli
       fi
     ;;
     Linux )
