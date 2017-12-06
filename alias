@@ -2,6 +2,10 @@
 
 whoami = sts get-caller-identity
 
+# Decode Authorization Message
+de-auth = !f() { aws sts decode-authorization-message --encoded-message ${1} --output text > ~/Downloads/output.json && \
+            atom ~/Downloads/output.json; }; f
+
 # Instance ID from Name
 name-id = !f() { aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId' --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --output text; }; f
 
