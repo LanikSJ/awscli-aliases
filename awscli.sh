@@ -40,11 +40,11 @@ awscli() {
       pip3 show awscli
       if [ $? != 0 ]
       then
-        echo "AWS CLI not installed using pip. Installing/Updating AWS CLI using Brew... "
-        brew install awscli
-      else
-        echo "awscli already installed using pip, upgrading..."
+        echo "AWS CLI not installed using pip. "
         pip3 install awscli
+      else
+        echo "AWS CLI already installed using pip, upgrading..."
+        pip3 install -U awscli
       fi
     ;;
     Linux )
@@ -58,11 +58,8 @@ awscli() {
   esac
 }
 
-# Write out AWS CLI version number
-aws --version 2>/tmp/version.txt 1>&2
-
 # Variables
-AWSVERSION=$(cat /tmp/version.txt |awk -F"/" '{print $2}' |sed 's/ Python//')
+AWSVERSION=$(aws --version | awk -F"/" '{print $2}' |sed 's/ Python//')
 
 echo "Your AWS CLI version is: $AWSVERSION"
 
