@@ -69,10 +69,9 @@ iam-keys = !f() { for user in $(aws iam list-users --output text | awk '{print $
 # Docker ECR Login
 ecr-login =
   !f() {
-    region=$(aws configure get region)
-    endpoint=$(aws ecr get-authorization-token --region $region --output text --query 'authorizationData[].proxyEndpoint')
-    passwd=$(aws ecr get-authorization-token --region $region --output text --query 'authorizationData[].authorizationToken' | base64 --decode | cut -d: -f2)
-    docker login -u AWS -p $passwd $endpoint
+    endpoint=$(aws ecr get-authorization-token --output text --query 'authorizationData[].proxyEndpoint')
+    passwd=$(aws ecr get-authorization-token --output text --query 'authorizationData[].authorizationToken' | base64 --decode | cut -d: -f2)
+    echo $passwd| docker login -u AWS --password-stdin $endpoint
   }; f
 
 # Instance Size by Name
