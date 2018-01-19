@@ -42,6 +42,9 @@ name-key = !f() { aws ec2 describe-instances --filters Name=tag:Name,Values=${1}
 # List of Machines Matching a Name
 name-list = !f() { aws ec2 describe-instances --filters Name=tag:Name,Values=${1} Name=instance-state-name,Values=running --query 'Reservations[].Instances[].Tags[?Key==`Name`].Value' --output text; }; f
 
+# Instance ID from Instance IP
+ip-id = !f() { aws ec2 describe-instances --filters Name=network-interface.addresses.private-ip-address,Values=${1} --query 'Reservations[].Instances[].InstanceId' --output text; }; f
+
 # Instance Name from Private IP
 ip-name = !f() { aws ec2 describe-instances --filters Name=network-interface.addresses.private-ip-address,Values=${1} --query 'Reservations[].Instances[].Tags[?Key==`Name`].Value' --output text; }; f
 
