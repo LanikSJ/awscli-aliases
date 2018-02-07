@@ -2,6 +2,9 @@
 
 whoami = sts get-caller-identity
 
+# AMI Owner
+ami-owner = !f() { aws ec2 describe-instances --filters Name=image-id,Values=ami-a6a7c1c6 --query 'Reservations[].Instances[].{Owner: Tags[?Key==`owner`].Value | [0],ID:InstanceId}' --output table; }; f
+
 # Decode Authorization Message
 de-auth = !f() { aws sts decode-authorization-message --encoded-message ${1} --output text > ~/Downloads/output.json && \
             atom ~/Downloads/output.json; }; f
