@@ -93,7 +93,7 @@ instance-size =
 vpc-peers =
   !f() {
     aws ec2 describe-vpc-peering-connections \
-    --query 'VpcPeeringConnections[].Tags[].Value' --output text | xargs -n1 | sort -d
+    --query 'VpcPeeringConnections[].Tags[?Key==`Name`].Value' --output text | xargs -n1 | sort -d
   }; f
 
 # List EC2 Instances
