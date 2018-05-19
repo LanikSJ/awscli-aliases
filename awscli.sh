@@ -59,8 +59,8 @@ awscli() {
 }
 
 # Variables
-AWSVERSION=$(aws --version | awk -F"/" '{print $2}' |sed 's/ Python//')
-AWSCURRENT=$(curl -sSL https://api.github.com/repos/aws/aws-cli/tags | jq -r '.[0].name')
+export AWSVERSION=$(aws --version | awk -F"/" '{print $2}' | sed 's/ Python//')
+export AWSCURRENT=$(curl -sSL https://api.github.com/repos/aws/aws-cli/tags | jq -r '.[0].name')
 
 if [[ -z $AWSVERSION ]]; then
   echo "AWS CLI isn't installed. Installing ... "
