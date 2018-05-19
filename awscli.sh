@@ -46,29 +46,30 @@ awscli() {
         echo "AWS CLI already installed using pip, upgrading..."
         pip3 install -U awscli
       fi
-    ;;
+      ;;
     Linux )
       echo "For Linux systems, please manually install / update AWS CLI. "
       exit 1
-    ;;
+      ;;
     * )
       echo "`uname` is an unsupported OS. Please manually install / update AWS CLI. "
       exit 1
-    ;;
+      ;;
   esac
 }
 
 # Variables
 AWSVERSION=$(aws --version | awk -F"/" '{print $2}' |sed 's/ Python//')
-
-echo "Your AWS CLI version is: $AWSVERSION"
+AWSCURRENT=$(curl -sSL https://api.github.com/repos/aws/aws-cli/tags | jq '.[0]' | jq '.["name"]' |sed 's/"//g')
 
 if [[ -z $AWSVERSION ]]; then
   echo "AWS CLI isn't installed. Installing ... "
   awscli && rm -f /tmp/version.txt
+else
+  echo "Your AWS CLI version is: $AWSVERSION"
 fi
 
-if [[ $AWSVERSION < '1.11.24' ]]; then
+if [[ $AWSVERSION < "$AWSCURRENT" ]]; then
   echo "Your version of AWS CLI is out of date! Updating ... "
   awscli && rm -f /tmp/version.txt
 else
