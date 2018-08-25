@@ -8,20 +8,29 @@ awscli() {
       type brew
       if [ $? != 0 ]
       then
-        echo "brew not found. Please install at http://brew.sh"
+        echo "brew not found, please install at http://brew.sh"
         exit 1
       else
-        echo "brew already installed..."
+        echo "brew already installed ..."
+      fi
+
+      type jq
+      if [ $? != 0 ]
+      then
+        echo "jq not found installing ..."
+        brew install jq
+      else
+        echo "jq already installed..."
       fi
 
       type python3
       if [ $? != 0 ]
       then
-        echo "python3 not found. Installing.."
+        echo "python3 not found installing ..."
         brew install python3
         if [ $? != 0 ]
         then
-          echo "Failed to install python3.."
+          echo "Failed to install python3, please correct."
           exit 1
         fi
       else
@@ -31,10 +40,10 @@ awscli() {
       type pip3
       if [ $? != 0 ]
       then
-        echo "pip3 not found. Please correct."
+        echo "pip3 not found, please correct."
         exit 1
       else
-        echo "pip3 already installed..."
+        echo "pip3 already installed."
       fi
 
       pip3 show awscli
@@ -64,15 +73,14 @@ export AWSCURRENT=$(curl -sSL https://api.github.com/repos/aws/aws-cli/tags | jq
 
 if [[ -z $AWSVERSION ]]; then
   echo "AWS CLI isn't installed. Installing ... "
-  awscli && rm -f /tmp/version.txt
+  awscli
 else
   echo "Your AWS CLI version is: $AWSVERSION"
 fi
 
 if [[ $AWSVERSION < "$AWSCURRENT" ]]; then
   echo "Your version of AWS CLI is out of date! Updating ... "
-  awscli && rm -f /tmp/version.txt
+  awscli
 else
   echo "Your version of AWS CLI is up to date! Nothing to do. "
-  rm -f /tmp/version.txt
 fi
