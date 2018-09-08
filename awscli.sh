@@ -3,7 +3,7 @@
 
 # Install / Update Function
 awscli() {
-  case `uname` in
+  case $(uname) in
     "Darwin" )
       type brew
       if [ $? != 0 ]
@@ -61,7 +61,7 @@ awscli() {
       exit 1
       ;;
     * )
-      echo "`uname` is an unsupported OS. Please manually install / update AWS CLI. "
+      echo "$(uname) is an unsupported OS. Please manually install / update AWS CLI. "
       exit 1
       ;;
   esac
