@@ -1,5 +1,7 @@
 # AWS CLI Aliases
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b59e54424206442e8dfa31065faf526c)](https://app.codacy.com/app/LanikSJ/awscli-aliases?utm_source=github.com&utm_medium=referral&utm_content=LanikSJ/awscli-aliases&utm_campaign=Badge_Grade_Dashboard)
+
 ## Requirements
 
 aws cli ``1.11.24`` or higher:
