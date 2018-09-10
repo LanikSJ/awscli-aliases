@@ -35,5 +35,3 @@ Output:
 ## Bugs
 
 Please report any bugs or issues you find. Thanks!
-
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
