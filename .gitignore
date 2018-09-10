@@ -1,5 +1,6 @@
 # Compiled source #
 ###################
+.sass-cache
 *.com
 *.class
 *.dll
