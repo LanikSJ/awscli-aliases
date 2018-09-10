@@ -2,8 +2,8 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8d6dd836703e4f37a636c7086fedf619)](https://www.codacy.com/app/LanikSJ/awscli-aliases?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=LanikSJ/awscli-aliases&amp;utm_campaign=Badge_Grade) [![Build Status](https://travis-ci.com/LanikSJ/awscli-aliases.svg?branch=master)](https://travis-ci.com/LanikSJ/awscli-aliases) [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
 
 <p align="center">
-  <a href="https://github.com/HustLion/spanish-cards">
-    <img src="https://rawgit.com/HustLion/spanish-cards/master/icon/spanish-cards.png" />
+  <a href="https://github.com/LanikSJ/awscli-aliases">
+    <img src="https://rawgit.com/LanikSJ/awscli-aliases/master/favicon.ico" />
   </a>
 </p>
 
