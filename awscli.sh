@@ -4,8 +4,8 @@
 # Install / Update Function
 
 if [[ uname == "Darwin" ]]; then
+  brew install jq python3 ruby
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  brew install jq python3
 elif [[ uname == "Ubuntu" ]]; then
   apt-get install python3 jq
 elif [[ uname == "RedHat" ]] || [[ uname == "CentOS" ]]; then
