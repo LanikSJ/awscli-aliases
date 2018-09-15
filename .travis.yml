@@ -1,8 +1,8 @@
+env:
+  global:
+    - CODECOV_TOKEN=4bd3d3ee-ecc8-4130-90d7-276626099dc4
+
 os: osx
 language: bash
 script:
     - bash -n awscli.sh
-
-env:
-  global:
-    - CODECOV_TOKEN=4bd3d3ee-ecc8-4130-90d7-276626099dc4
