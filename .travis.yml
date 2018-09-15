@@ -27,7 +27,7 @@ install:
 - cd ../..
 - rm -rf kcov-master
 - mkdir -p coverage
-- sudo pip install awscli
+- sudo pip3 install -U pip awscli
 
 script:
 - kcov coverage awscli.sh
