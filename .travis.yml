@@ -29,6 +29,7 @@ install:
 - cd ../..
 - rm -rf kcov-master
 - mkdir -p coverage
+- ls -alh
 
 script:
 - kcov coverage awscli.sh
