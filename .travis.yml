@@ -1,5 +1,3 @@
-sudo: false
-
 addons:
   apt:
     packages:
@@ -29,7 +27,7 @@ install:
 - cd ../..
 - rm -rf kcov-master
 - mkdir -p coverage
-- pip install awscli
+- sudo pip install awscli
 
 script:
 - kcov coverage awscli.sh
