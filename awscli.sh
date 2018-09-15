@@ -3,7 +3,7 @@
 
 # Install / Update Function
 
-if [[ uanme !== "Darwin" ]]; then
+if [[ uname !== "Darwin" ]]; then
   echo "This script is only designed for macOS X"
 fi
 
