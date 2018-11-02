@@ -3,8 +3,8 @@
 
 ## Requirements
 
-aws cli ``1.11.24`` or higher:
-[AWS CLI User Guide](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
+aws cli ``1.11.24`` or higher, see
+[AWS CLI User Guide](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) for more info.
 
 Use ``awscli.sh`` script to install / update AWS CLI if yours is out of date. Use ``aws --version`` to verify.
 
