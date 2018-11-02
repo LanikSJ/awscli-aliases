@@ -2,6 +2,7 @@ addons:
   apt:
     packages:
       - binutils-dev
+      - jq
       - libcurl4-openssl-dev
       - libdw-dev
       - libiberty-dev
@@ -19,7 +20,7 @@ before_install:
 - wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
 
 install:
-- sudo pip3 install -U awscli codecov pip
+- sudo -H pip3 install -U awscli codecov pip
 
 script:
 - coverage run awscli.sh
