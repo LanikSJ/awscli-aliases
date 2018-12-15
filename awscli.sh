@@ -3,13 +3,7 @@
 
 # Install / Update Function
 
-if [[ uname == "Darwin" ]]; then
-  which brew >/dev/null
-  if [ "$?" = "0" ]; then
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  fi
-  brew install jq python3
-fi
+if [[ uname == "Darwin" ]]; then which brew >/dev/null if [ "$?" = "0" ]; then /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; fi brew install jq python3; fi
 
 if [[ uname == "Ubuntu" ]]; then apt-get install python3 jq; fi
 
