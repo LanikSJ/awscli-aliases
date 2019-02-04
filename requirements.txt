@@ -1,0 +1,12 @@
+PyYAML
+awscli
+botocore
+colorama==0.3.9
+docutils
+jmespath
+pyasn1
+python-dateutil
+rsa==3.4.2
+s3transfer
+six
+urllib3
