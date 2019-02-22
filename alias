@@ -73,7 +73,7 @@ net-acls = !f() { aws ec2 describe-network-acls --network-acl-ids ${1} --query '
 iam-keys = !f() { for user in $(aws iam list-users --output text | awk '{print $NF}'); do aws iam list-access-keys --user $user --output text; done; }; f
 
 # List All Availability Zones
-avail-zones = !f() { for region in us-west-2 us-east-1 us-east-2; do printf "\nAWS REGION: $region\n"; aws ec2 describe-availability-zones --region $region --query "AvailabilityZones[*].ZoneName | join(',', @)" --output text; done; }; f
+list-azs = !f() { aws ec2 describe-availability-zones --region $1 --query AvailabilityZones[].ZoneName --output text; }; f
 
 # Docker ECR Login
 ecr-login =
