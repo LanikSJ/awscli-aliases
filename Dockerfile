@@ -5,4 +5,3 @@ RUN apk --no-cache add python3 && pip3 install -U pip && \
    yes | pip3 uninstall pip && rm -f requirements.txt
 COPY alias /root/.aws/cli/alias
 ENTRYPOINT ["/usr/bin/aws"]
-CMD ["/bin/sh"]
