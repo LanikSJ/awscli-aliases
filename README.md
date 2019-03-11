@@ -46,4 +46,4 @@ $docker run -v ~/.aws/credentials:/root/.aws/credentials:ro -it laniksj/awscli-a
 Please report any bugs or issues you find. Thanks!
 
 ## License
-[![GPLv3 license](https://badgen.net/github/license/LanikSJ/awscli-aliases)](http://perso.crans.org/besson/LICENSE.html)
+[![GPLv3 license](https://img.shields.io/github/license/LanikSJ/ubo-filters.svg?color=brightgreen)](http://perso.crans.org/besson/LICENSE.html)
