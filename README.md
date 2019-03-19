@@ -1,5 +1,7 @@
 # AWS CLI Aliases
-[![Build Status](https://travis-ci.com/LanikSJ/awscli-aliases.svg?branch=master)](https://travis-ci.com/LanikSJ/awscli-aliases)[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=LanikSJ/awscli-aliases)](https://dependabot.com)[![Known Vulnerabilities](https://snyk.io/test/github/LanikSJ/awscli-aliases/badge.svg?targetFile=/docs/Gemfile.lock)](https://snyk.io/test/github/LanikSJ/awscli-aliases)
+[![Build Status](https://travis-ci.com/LanikSJ/awscli-aliases.svg?branch=master)](https://travis-ci.com/LanikSJ/awscli-aliases)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=LanikSJ/awscli-aliases)](https://dependabot.com)
+[![Known Vulnerabilities](https://snyk.io/test/github/LanikSJ/awscli-aliases/badge.svg?targetFile=/docs/Gemfile.lock)](https://snyk.io/test/github/LanikSJ/awscli-aliases)
 
 ## Requirements
 
@@ -9,7 +11,8 @@ AWS CLI ``1.11.24`` or higher, see
 Use ``awscli.sh`` script to install / update AWS CLI if yours is out of date. Use ``aws --version`` to verify.
 
 ## Usage
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8d6dd836703e4f37a636c7086fedf619)](https://www.codacy.com/app/LanikSJ/awscli-aliases?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=LanikSJ/awscli-aliases&amp;utm_campaign=Badge_Grade)[![codecov](https://codecov.io/gh/LanikSJ/awscli-aliases/branch/master/graph/badge.svg)](https://codecov.io/gh/LanikSJ/awscli-aliases)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8d6dd836703e4f37a636c7086fedf619)](https://www.codacy.com/app/LanikSJ/awscli-aliases?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=LanikSJ/awscli-aliases&amp;utm_campaign=Badge_Grade)
+[![codecov](https://codecov.io/gh/LanikSJ/awscli-aliases/branch/master/graph/badge.svg)](https://codecov.io/gh/LanikSJ/awscli-aliases)
 
 ```bash
 $ mkdir -p GitHub; cd GitHub
@@ -34,7 +37,10 @@ Output:
 }
 ```
 ## Docker
-[![Docker Repository on Docker Hub](https://img.shields.io/docker/cloud/automated/laniksj/awscli-aliases.svg?style=flat)](https://hub.docker.com/r/laniksj/awscli-aliases)[![Docker Repository on Quay](https://quay.io/repository/laniksj/awscli-aliases/status "Docker Repository on Quay")](https://quay.io/repository/laniksj/awscli-aliases)![](https://img.shields.io/docker/pulls/laniksj/awscli-aliases.svg?style=flat)[![](https://images.microbadger.com/badges/image/laniksj/awscli-aliases.svg)](https://microbadger.com/images/laniksj/awscli-aliases "Get your own image badge on microbadger.com")
+[![Docker Repository on Docker Hub](https://img.shields.io/docker/cloud/automated/laniksj/awscli-aliases.svg?style=flat)](https://hub.docker.com/r/laniksj/awscli-aliases)
+[![Docker Repository on Quay](https://quay.io/repository/laniksj/awscli-aliases/status "Docker Repository on Quay")](https://quay.io/repository/laniksj/awscli-aliases)
+![](https://img.shields.io/docker/pulls/laniksj/awscli-aliases.svg?style=flat)
+[![Docker Layers](https://images.microbadger.com/badges/image/laniksj/awscli-aliases.svg)](https://microbadger.com/images/laniksj/awscli-aliases "Get your own image badge on microbadger.com")
 
 If you would like to try the aliases in a docker container and already have AWS CLI installed:
 
@@ -46,4 +52,4 @@ $docker run -v ~/.aws/credentials:/root/.aws/credentials:ro -it laniksj/awscli-a
 Please report any bugs or issues you find. Thanks!
 
 ## License
-[![GPLv3 license](https://img.shields.io/github/license/LanikSJ/ubo-filters.svg?color=brightgreen)](http://perso.crans.org/besson/LICENSE.html)
+[![GPLv3 License](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
