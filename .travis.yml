@@ -25,15 +25,12 @@ env:
 before_install:
 - wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
 - /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-- brew install awscli jq
 
 install:
-- tar xzf master.tar.gz && cd kcov-master && mkdir build && cd build
-- cmake -DCMAKE_INSTALL_PREFIX=${HOME}/kcov .. && make && make install
-- cd ../.. && rm -rf kcov-master && mkdir -p coverage
+- brew install awscli jq && pip3 install -U pip codecov pip && mkdir -p coverage
 
 script:
-- kcov coverage awscli.sh
+- coverage run awscli.sh
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
