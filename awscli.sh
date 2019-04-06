@@ -13,6 +13,8 @@ if [[ uname == "RedHat" ]] || [[ uname == "CentOS" ]]; then yum -y install pytho
 export AWSVERSION=$(aws --version | awk -F"/" '{print $2}' | sed 's/ Python//')
 export AWSCURRENT=$(curl -sSL https://api.github.com/repos/aws/aws-cli/tags | jq -e -r '.[1].name')
 
+curl -sSL https://api.github.com/repos/aws/aws-cli/tags
+
 if [[ -z $AWSVERSION ]]; then pip3 install -U awscli; else echo "Your AWS CLI version is: $AWSVERSION"; fi
 
 if [[ $AWSVERSION < "$AWSCURRENT" ]]; then pip3 install -U awscli; else echo "Your version of AWS CLI is up to date! Nothing to do. "; fi
