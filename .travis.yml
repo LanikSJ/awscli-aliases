@@ -10,6 +10,13 @@ addons:
 
 language: bash
 
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode10
+      rvm: system
+  fast_finish: true
+
 env:
   global:
     - CODECOV_TOKEN=4bd3d3ee-ecc8-4130-90d7-276626099dc4
@@ -19,17 +26,9 @@ before_install:
 - wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
 
 install:
-- tar xzf master.tar.gz
-- cd kcov-master
-- mkdir build
-- cd build
-- cmake -DCMAKE_INSTALL_PREFIX=${HOME}/kcov ..
-- make
-- make install
-- cd ../..
-- rm -rf kcov-master
-- mkdir -p coverage
-- sudo pip3 install -U pip awscli
+- tar xzf master.tar.gz && cd kcov-master && mkdir build && cd build
+- cmake -DCMAKE_INSTALL_PREFIX=${HOME}/kcov .. && make && make install
+- cd ../.. && rm -rf kcov-master && mkdir -p coverage
 
 script:
 - kcov coverage awscli.sh
