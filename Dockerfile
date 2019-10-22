@@ -1,4 +1,4 @@
-FROM alpine:3.10.2
+FROM alpine:3.10.3
 COPY requirements.txt requirements.txt
 RUN apk --no-cache add python3 && pip3 install -U pip && \
    pip3 install -r requirements.txt && mkdir -p ~/.aws/cli && \
