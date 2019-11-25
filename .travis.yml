@@ -8,14 +8,12 @@ addons:
       - python3
       - python3-pip
 
-language: python3
-cache: pip
+language: ruby
 
 matrix:
   include:
     - os: osx
       osx_image: xcode10
-      rvm: system
   fast_finish: true
 
 env:
@@ -23,7 +21,6 @@ env:
       export PATH="/usr/local/opt/ccache/libexec:$PATH"
       CODECOV_TOKEN=4bd3d3ee-ecc8-4130-90d7-276626099dc4
       PATH=${PATH}:${HOME}/kcov/bin
-      secure: "Jph3L2hLGAWtF/Pk+z8qdtW52d4vp4BZ/XbUrVEDWTshc3J5VTg9yKoGv/7UIotWSs8gfTOCCPCeeRzpX8BQLJh/wJ6SlkCb0e4YHAj8xRwxN0NskHisI2Ti4t5BfxHSPBSJEplPyCDlaHVmcXo2vugM0Tyil8zDffChxZKXvSXgJRP08qnxHQM3UJIVXyKUAmeP+zIcH/ixv4FDEOXFX83HGN6VmGwN19xwnSEOhx+HylN93zDTVIS5gTjkA1VkGdJriWPmEE+XS3tADxfa+Vzj/JD3D3XIX+Z5V1pO7djU/Hvr4Sbhgc0Mnbxur2JFMqwXdfaf9wkHQVGrcRYKz3huRjbsZguewmKZqShg+fq4Sqt1D63f+VCdh+YubMTPURvCO95jXkLhnbfDnjHSpPbCK/5grpfPequpMlzlRiYkxuKriCjlFq6t/ouzsNuofjrMKqJamKxPXLy0otbGqlPqTjjoMls21ZRu1wpYqUP5ddOUCgLbmFaJvCwU+Pudc5WtnCelJ89VwIZ2ZbeA2VQzVg8zteEqwgrFeQQOQgp+nLH3zTspQzv6QkNiAcogqJpz6D4XeytrriIHaLU7dguDsq4Tp2yRr5lpd480A3DNbkCY09f4sITiGs1GWhcI0yKM7I+j3gS+mioQCamOw821l/JxqoKqnwzovKEh8x8="
 
 before_install: |
   wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
