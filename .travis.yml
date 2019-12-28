@@ -27,7 +27,7 @@ before_install: |
   pip install awscli
 
 install: |
-  zip -d master.zip && cd kcov-master && mkdir build && cd build
+  unzip -a master.zip && cd kcov-master && mkdir build && cd build
   cmake -DCMAKE_INSTALL_PREFIX=${HOME}/kcov .. && make && make install
   cd ../.. && rm -rf kcov-master && mkdir -p coverage
 
