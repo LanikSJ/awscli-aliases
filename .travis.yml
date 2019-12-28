@@ -5,8 +5,6 @@ addons:
       - libcurl4-openssl-dev
       - libdw-dev
       - libiberty-dev
-      - python3
-      - python3-pip
 
 language: ruby
 
