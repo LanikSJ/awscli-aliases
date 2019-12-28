@@ -23,12 +23,11 @@ env:
       PATH=${PATH}:${HOME}/kcov/bin
 
 before_install: |
-  wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  brew install awscli ccache jq
+  wget https://github.com/SimonKagstrom/kcov/archive/master.zip
+  pip install awscli
 
 install: |
-  tar xzf master.tar.gz && cd kcov-master && mkdir build && cd build
+  unzip -a master.zip && cd kcov-master && mkdir build && cd build
   cmake -DCMAKE_INSTALL_PREFIX=${HOME}/kcov .. && make && make install
   cd ../.. && rm -rf kcov-master && mkdir -p coverage
 
