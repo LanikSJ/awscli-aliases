@@ -23,7 +23,7 @@ env:
 before_install: |
   wget https://github.com/SimonKagstrom/kcov/archive/master.zip
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  brew install awscli ccache jq
+  brew install awscli ccache jq --force
 
 install: |
   zip -d master.zip && cd kcov-master && mkdir build && cd build
