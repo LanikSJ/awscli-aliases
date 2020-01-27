@@ -52,6 +52,7 @@ If you would like to try the aliases in a docker container and already have AWS 
 ```bash
 $docker run -v ~/.aws/credentials:/root/.aws/credentials:ro -it laniksj/awscli-aliases whoami
 ```
+
 Bugs
 ============
 
