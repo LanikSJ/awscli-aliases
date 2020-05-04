@@ -16,7 +16,7 @@ env:
 before_install: |
   wget https://github.com/SimonKagstrom/kcov/archive/master.zip
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-  brew update && pip3 install awscli jq
+  brew update && brew install jq && pip3 install awscli
 
 install: |
   unzip -a master.zip && cd kcov-master && mkdir build && cd build
