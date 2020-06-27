@@ -1,7 +1,7 @@
 # AWS CLI Aliases
 
 [![Build Status](https://travis-ci.com/LanikSJ/awscli-aliases.svg?branch=master)](https://travis-ci.com/LanikSJ/awscli-aliases)
-[![Known Vulnerabilities](https://snyk.io/test/github/LanikSJ/awscli-aliases/badge.svg?targetFile=/docs/Gemfile.lock)](https://snyk.io/test/github/LanikSJ/awscli-aliases)
+[![Ruby Vulnerabilities](https://snyk.io/test/github/LanikSJ/awscli-aliases/badge.svg?targetFile=/docs/Gemfile.lock)](https://snyk.io/test/github/LanikSJ/awscli-aliases)
 
 -   [Requirements](#requirements)
 -   [Usage](#usage)
@@ -22,6 +22,7 @@ Use `awscli.sh` script to install / update AWS CLI if yours is out of date. Use 
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8d6dd836703e4f37a636c7086fedf619)](https://www.codacy.com/app/LanikSJ/awscli-aliases?utm_source=github.com&utm_medium=referral&utm_content=LanikSJ/awscli-aliases&utm_campaign=Badge_Grade)
 [![codecov](https://codecov.io/gh/LanikSJ/awscli-aliases/branch/master/graph/badge.svg)](https://codecov.io/gh/LanikSJ/awscli-aliases)
+[![Python Vulnerabilities](https://snyk.io/test/github/LanikSJ/awscli-aliases/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/LanikSJ/awscli-aliases?targetFile=requirements.txt)
 
 ```bash
 $ mkdir -p GitHub; cd GitHub
