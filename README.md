@@ -1,7 +1,6 @@
 # AWS CLI Aliases
 
 [![Build Status](https://travis-ci.com/LanikSJ/awscli-aliases.svg?branch=master)](https://travis-ci.com/LanikSJ/awscli-aliases)
-[![Ruby Vulnerabilities](https://snyk.io/test/github/LanikSJ/awscli-aliases/badge.svg?targetFile=/docs/Gemfile.lock)](https://snyk.io/test/github/LanikSJ/awscli-aliases)
 
 -   [Requirements](#requirements)
 -   [Usage](#usage)
