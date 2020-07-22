@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="AWS CLI Aliases : ">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>AWS CLI Aliases</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/LanikSJ">View on GitHub</a>
+
+          <h1 id="project_title">AWS CLI Aliases</h1>
+          <h2 id="project_tagline"></h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p><a href="https://travis-ci.com/LanikSJ/awscli-aliases"><img src="https://travis-ci.com/LanikSJ/awscli-aliases.svg?branch=master" alt="Build Status"></a>
+<a href="https://snyk.io/test/github/LanikSJ/awscli-aliases?targetFile=requirements.txt"><img src="https://snyk.io/test/github/LanikSJ/awscli-aliases/badge.svg?targetFile=requirements.txt" alt="Vulnerabilities"></a></p>
+<ul>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#test">Test</a></li>
+<li><a href="#docker">Docker</a></li>
+<li><a href="#bugs">Bugs</a></li>
+<li><a href="#license">License</a></li>
+<li><a href="#donate">Donate</a></li>
+</ul>
+<h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements</h2>
+<p>AWS CLI <code>1.11.24</code> or higher, see
+<a href="http://docs.aws.amazon.com/cli/latest/userguide/installing.html">AWS CLI User Guide</a> for more info.</p>
+<p>Use <code>awscli.sh</code> script to install / update AWS CLI if yours is out of date. Use <code>aws --version</code> to verify.</p>
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+<p><a href="https://www.codacy.com/app/LanikSJ/awscli-aliases?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=LanikSJ/awscli-aliases&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/8d6dd836703e4f37a636c7086fedf619" alt="Codacy Badge"></a>
+<a href="https://codecov.io/gh/LanikSJ/awscli-aliases"><img src="https://codecov.io/gh/LanikSJ/awscli-aliases/branch/master/graph/badge.svg" alt="codecov"></a></p>
+<div class="highlight highlight-source-shell"><pre>$ mkdir -p GitHub<span class="pl-k">;</span> <span class="pl-c1">cd</span> GitHub
+$ git clone https://github.com/LanikSJ/awscli-aliases
+$ mkdir -p <span class="pl-k">~</span>/.aws/cli
+$ ln -sf <span class="pl-k">~</span>/GitHub/awscli-aliases/alias <span class="pl-k">~</span>/.aws/cli/alias</pre></div>
+<h2>
+<a id="test" class="anchor" href="#test" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Test</h2>
+<div class="highlight highlight-source-shell"><pre>aws whoami</pre></div>
+<p>Same as <code>aws sts get-caller-identity</code></p>
+<p>Output:</p>
+<pre><code>{
+    "Account": "1234567890",
+    "UserId": "AROAJGILZWBHUUPCERBWY",
+    "Arn": "arn:aws:sts::1234567890:user/UserId"
+}
+</code></pre>
+<h2>
+<a id="docker" class="anchor" href="#docker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Docker</h2>
+<p><a href="https://hub.docker.com/r/laniksj/awscli-aliases"><img src="https://img.shields.io/docker/cloud/automated/laniksj/awscli-aliases.svg?style=flat" alt="Docker Repository on Docker Hub"></a>
+<a href="https://quay.io/repository/laniksj/awscli-aliases"><img src="https://quay.io/repository/laniksj/awscli-aliases/status" alt="Docker Repository on Quay" title="Docker Repository on Quay"></a>
+<img src="https://img.shields.io/docker/pulls/laniksj/awscli-aliases.svg?style=flat" alt="">
+<a href="https://microbadger.com/images/laniksj/awscli-aliases" title="Get your own image badge on microbadger.com"><img src="https://images.microbadger.com/badges/image/laniksj/awscli-aliases.svg" alt="Docker Layers"></a></p>
+<p>If you would like to try the aliases in a docker container and already have AWS CLI installed:</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-smi">$docker</span> run -v <span class="pl-k">~</span>/.aws/credentials:/root/.aws/credentials:ro -it laniksj/awscli-aliases whoami</pre></div>
+<h2>
+<a id="bugs" class="anchor" href="#bugs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Bugs</h2>
+<p>Please report any bugs or issues you find. Thanks!</p>
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+<p><a href="https://en.wikipedia.org/wiki/MIT_License"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License"></a></p>
+<h2>
+<a id="donate" class="anchor" href="#donate" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Donate</h2>
+<p><a href="https://www.patreon.com/laniksj/overview"><img src="https://img.shields.io/badge/patreon-donate-red.svg" alt="Patreon"></a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
