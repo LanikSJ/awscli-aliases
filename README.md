@@ -49,8 +49,9 @@ Output:
 
 [![Docker Repository on Docker Hub](https://img.shields.io/docker/cloud/automated/laniksj/awscli-aliases.svg?style=flat)](https://hub.docker.com/r/laniksj/awscli-aliases)
 [![Docker Repository on Quay](https://quay.io/repository/laniksj/awscli-aliases/status "Docker Repository on Quay")](https://quay.io/repository/laniksj/awscli-aliases)
-![](https://img.shields.io/docker/pulls/laniksj/awscli-aliases.svg?style=flat)
-[![Docker Layers](https://images.microbadger.com/badges/image/laniksj/awscli-aliases.svg)](https://microbadger.com/images/laniksj/awscli-aliases "Get your own image badge on microbadger.com")
+![Docker Pulls](https://img.shields.io/docker/pulls/laniksj/awscli-aliases.svg?style=flat)
+![Docker Size](https://img.shields.io/docker/image-size/laniksj/awscli-aliases?sort=date)
+![Docker Layers](https://img.shields.io/microbadger/layers/laniksj/awscli-aliases)
 
 If you would like to try the aliases in a docker container and already have AWS CLI installed:
 
