@@ -16,12 +16,9 @@ env:
 before_install: |
   wget https://github.com/SimonKagstrom/kcov/archive/master.zip
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-  brew update && brew install jq && pip3 install awscli
 
 install: |
-  unzip -a master.zip && cd kcov-master && mkdir build && cd build
-  cmake -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DCMAKE_INSTALL_PREFIX=${HOME}/kcov ..
-  make && make install && cd ../.. && rm -rf kcov-master && mkdir -p coverage
+  brew update && brew install cmake jq kcov && pip3 install awscli
 
 script: |
   kcov coverage awscli.sh
