@@ -14,7 +14,6 @@ env:
       PATH=${PATH}:${HOME}/kcov/bin
 
 before_install: |
-  wget https://github.com/SimonKagstrom/kcov/archive/master.zip
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 install: |
