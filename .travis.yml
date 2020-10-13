@@ -17,7 +17,7 @@ before_install: |
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 install: |
-  brew update && brew install jq kcov && pip3 install awscli
+  brew update && brew upgrade && brew install jq kcov && pip3 install awscli
 
 script: |
   kcov coverage awscli.sh
