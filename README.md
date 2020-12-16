@@ -1,6 +1,6 @@
 # AWS CLI Aliases
 
-[![Build Status](https://travis-ci.com/LanikSJ/awscli-aliases.svg?branch=master)](https://travis-ci.com/LanikSJ/awscli-aliases)
+[![Actions Status](https://github.com/LanikSJ/awscli-aliases/workflows/CI/badge.svg)](https://github.com/LanikSJ/awscli-aliases/actions)
 
 -   [Requirements](#requirements)
 -   [Usage](#usage)
