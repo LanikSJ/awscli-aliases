@@ -1,0 +1,26 @@
+
+language: ruby
+
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode11
+  fast_finish: true
+
+env:
+  global: |
+      export PATH="/usr/local/opt/ccache/libexec:$PATH"
+      CODECOV_TOKEN=4bd3d3ee-ecc8-4130-90d7-276626099dc4
+      PATH=${PATH}:${HOME}/kcov/bin
+
+before_install: |
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+install: |
+  brew install awscli jq kcov
+
+script: |
+  kcov coverage awscli.sh
+
+after_success: |
+  bash <(curl -s https://codecov.io/bash)
