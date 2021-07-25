@@ -47,8 +47,8 @@ Output:
 
 ## Docker
 
-[![Docker Repository on Docker Hub](https://img.shields.io/docker/cloud/automated/laniksj/awscli-aliases.svg?style=flat)](https://hub.docker.com/r/laniksj/awscli-aliases)
-[![Docker Repository on Quay](https://quay.io/repository/laniksj/awscli-aliases/status "Docker Repository on Quay")](https://quay.io/repository/laniksj/awscli-aliases)
+[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/laniksj/awscli-aliases?style=flat)](https://hub.docker.com/r/laniksj/awscli-aliases)
+[![Quay](https://quay.io/repository/laniksj/awscli-aliases/status "Docker Repository on Quay")](https://quay.io/repository/laniksj/awscli-aliases)
 ![Docker Pulls](https://img.shields.io/docker/pulls/laniksj/awscli-aliases.svg?style=flat)
 ![Docker Size](https://img.shields.io/docker/image-size/laniksj/awscli-aliases?sort=date)
 
