@@ -51,7 +51,6 @@ Output:
 [![Docker Repository on Quay](https://quay.io/repository/laniksj/awscli-aliases/status "Docker Repository on Quay")](https://quay.io/repository/laniksj/awscli-aliases)
 ![Docker Pulls](https://img.shields.io/docker/pulls/laniksj/awscli-aliases.svg?style=flat)
 ![Docker Size](https://img.shields.io/docker/image-size/laniksj/awscli-aliases?sort=date)
-![Docker Layers](https://img.shields.io/microbadger/layers/laniksj/awscli-aliases)
 
 If you would like to try the aliases in a docker container and already have AWS CLI installed:
 
