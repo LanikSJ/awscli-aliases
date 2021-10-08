@@ -28,7 +28,8 @@
   <!-- MAIN CONTENT -->
   <div id="main_content_wrap" class="outer">
     <section id="main_content" class="inner">
-      <p><a href="https://github.com/LanikSJ/awscli-aliases/actions"><img src="https://github.com/LanikSJ/awscli-aliases/workflows/CI/badge.svg" alt="Build Status"></a></p>
+      <p><a href="https://github.com/LanikSJ/awscli-aliases/actions"><img src="https://github.com/LanikSJ/awscli-aliases/workflows/CI/badge.svg" alt="Build Status"></a>
+      <a href="https://github.com/LanikSJ/awscli-aliases/actions"><img src="https://github.com/LanikSJ/awscli-aliases/workflows/Docker%20Image%20CI/badge.svg" alt="Docker Image CI"></a></p>
       <ul>
         <li><a href="#requirements">Requirements</a></li>
         <li><a href="#usage">Usage</a></li>
@@ -47,8 +48,7 @@
         <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
       <p><a href="https://www.codacy.com/app/LanikSJ/awscli-aliases?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=LanikSJ/awscli-aliases&amp;utm_campaign=Badge_Grade"><img
             src="https://api.codacy.com/project/badge/Grade/8d6dd836703e4f37a636c7086fedf619" alt="Codacy Badge"></a>
-        <a href="https://codecov.io/gh/LanikSJ/awscli-aliases"><img src="https://codecov.io/gh/LanikSJ/awscli-aliases/branch/master/graph/badge.svg" alt="codecov"></a>
-        <a href="https://snyk.io/test/github/LanikSJ/awscli-aliases?targetFile=requirements.txt"><img src="https://snyk.io/test/github/LanikSJ/awscli-aliases/badge.svg?targetFile=requirements.txt" alt="Python Vulnerabilities"></a></p>
+        <a href="https://codecov.io/gh/LanikSJ/awscli-aliases"><img src="https://codecov.io/gh/LanikSJ/awscli-aliases/branch/master/graph/badge.svg" alt="codecov"></a></p>
       <div class="highlight highlight-source-shell">
         <pre>$ mkdir -p GitHub<span class="pl-k">;</span> <span class="pl-c1">cd</span> GitHub
 $ git clone https://github.com/LanikSJ/awscli-aliases
@@ -73,7 +73,7 @@ $ ln -sf <span class="pl-k">~</span>/GitHub/awscli-aliases/alias <span class="pl
       <p><a href="https://hub.docker.com/r/laniksj/awscli-aliases"><img src="https://img.shields.io/docker/cloud/automated/laniksj/awscli-aliases.svg?style=flat" alt="Docker Repository on Docker Hub"></a>
         <a href="https://quay.io/repository/laniksj/awscli-aliases"><img src="https://quay.io/repository/laniksj/awscli-aliases/status" alt="Docker Repository on Quay" title="Docker Repository on Quay"></a>
         <img src="https://img.shields.io/docker/pulls/laniksj/awscli-aliases.svg?style=flat" alt="">
-        <a href="https://microbadger.com/images/laniksj/awscli-aliases" title="Get your own image badge on microbadger.com"><img src="https://images.microbadger.com/badges/image/laniksj/awscli-aliases.svg" alt="Docker Layers"></a></p>
+        <img src="https://img.shields.io/docker/image-size/laniksj/awscli-aliases?sort=date" alt=""></p>
       <p>If you would like to try the aliases in a docker container and already have AWS CLI installed:</p>
       <div class="highlight highlight-source-shell">
         <pre><span class="pl-smi">$docker</span> run -v <span class="pl-k">~</span>/.aws/credentials:/root/.aws/credentials:ro -it laniksj/awscli-aliases whoami</pre>
