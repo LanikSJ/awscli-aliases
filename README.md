@@ -1,6 +1,7 @@
 # AWS CLI Aliases
 
 [![Actions Status](https://github.com/LanikSJ/awscli-aliases/workflows/CI/badge.svg)](https://github.com/LanikSJ/awscli-aliases/actions)
+[![Actions Status](https://github.com/LanikSJ/awscli-aliases/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/LanikSJ/awscli-aliases/actions)
 
 -   [Requirements](#requirements)
 -   [Usage](#usage)
