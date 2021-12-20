@@ -19,7 +19,7 @@ Use `awscli.sh` script to install / update AWS CLI if yours is out of date. Use 
 
 ## Usage
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8d6dd836703e4f37a636c7086fedf619)](https://www.codacy.com/app/LanikSJ/awscli-aliases?utm_source=github.com&utm_medium=referral&utm_content=LanikSJ/awscli-aliases&utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/ae3e23f1514c42c897423d3e23544b55)](https://www.codacy.com/gh/LanikSJ/awscli-aliases/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=LanikSJ/awscli-aliases&amp;utm_campaign=Badge_Grade)
 [![codecov](https://codecov.io/gh/LanikSJ/awscli-aliases/branch/master/graph/badge.svg)](https://codecov.io/gh/LanikSJ/awscli-aliases)
 
 ```bash
