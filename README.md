@@ -48,7 +48,6 @@ Output:
 ## Docker
 
 [![Actions Status](https://github.com/LanikSJ/awscli-aliases/workflows/Docker%20Publish/badge.svg)](https://github.com/LanikSJ/awscli-aliases/actions)
-[![Quay](https://quay.io/repository/laniksj/awscli-aliases/status "Docker Repository on Quay")](https://quay.io/repository/laniksj/awscli-aliases)
 ![Docker Pulls](https://img.shields.io/docker/pulls/laniksj/awscli-aliases.svg?style=flat)
 ![Docker Size](https://img.shields.io/docker/image-size/laniksj/awscli-aliases?sort=date)
 
