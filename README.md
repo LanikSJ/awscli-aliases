@@ -1,6 +1,9 @@
 # AWS CLI Aliases
 
-[![Actions Status](https://github.com/LanikSJ/awscli-aliases/workflows/CI/badge.svg)](https://github.com/LanikSJ/awscli-aliases/actions)
+![GitHub Repo Size](https://img.shields.io/github/repo-size/laniksj/awscli-aliases)
+![GitHub Code Size in Bytes](https://img.shields.io/github/languages/code-size/laniksj/awscli-aliases)
+![GitHub Last Commit](https://img.shields.io/github/last-commit/laniksj/awscli-aliases)
+![GitHub Commit Activity](https://img.shields.io/github/commit-activity/m/laniksj/awscli-aliases)
 
 -   [Requirements](#requirements)
 -   [Usage](#usage)
@@ -48,8 +51,6 @@ Output:
 ## Docker
 
 [![Actions Status](https://github.com/LanikSJ/awscli-aliases/workflows/Docker%20Publish/badge.svg)](https://github.com/LanikSJ/awscli-aliases/actions)
-![Docker Pulls](https://img.shields.io/docker/pulls/laniksj/awscli-aliases.svg?style=flat)
-![Docker Size](https://img.shields.io/docker/image-size/laniksj/awscli-aliases?sort=date)
 
 If you would like to try the aliases in a docker container and already have AWS CLI installed:
 
