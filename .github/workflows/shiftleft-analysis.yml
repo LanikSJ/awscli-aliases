@@ -26,6 +26,7 @@ jobs:
         SCAN_AUTO_BUILD: true
       with:
         output: reports
+        type: "credscan,bash"
         # Scan auto-detects the languages in your project. To override uncomment the below variable and set the type
         # type: credscan,java
         # type: python
