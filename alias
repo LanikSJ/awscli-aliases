@@ -1,6 +1,6 @@
 [toplevel]
 
-whoami = sts get-caller-identity
+whoami = sts get-caller-identity --output table
 
 # AMI Owner
 ami-owner =
@@ -95,7 +95,7 @@ name-key =
 name-list =
   !f() {
     aws ec2 describe-instances --filters Name=tag:Name,Values=${1} Name=instance-state-name,Values=running \
-    --query 'Reservations[].Instances[].Tags[?Key==`Name`].Value' --output text
+    --query 'Reservations[].Instances[].Tags[?Key==`Name`].Value' --output table
   }; f
 
 # Instance ID from Instance IP
@@ -154,13 +154,13 @@ net-acls =
 # List IAM Access Keys
 iam-keys =
   !f() {
-    for user in $(aws iam list-users --output text | awk '{print $NF}'); do aws iam list-access-keys --user $user --output text; done
+    for user in $(aws iam list-users --output text | awk '{print $NF}'); do aws iam list-access-keys --user $user --output table; done
   }; f
 
 # List All Availability Zones
 list-azs = 
   !f() {
-    aws ec2 describe-availability-zones --region $1 --query AvailabilityZones[].ZoneName --output text
+    aws ec2 describe-availability-zones --region $1 --query AvailabilityZones[].ZoneName --output table
   }; f
 
 # Docker ECR Login
@@ -175,9 +175,8 @@ ecr-login =
 instance-size =
   !f() {
     instances=$(aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId' --filters "Name=tag:Name,Values='${1}'" --output text)
-    aws ec2 describe-instances --instance-ids $instances --filters 'Name=instance-state-name,Values=running' \
-    --query 'Reservations[].Instances[].{Name: Tags[?Key==`Name`].Value | [0],Size:InstanceType,ID:InstanceId}' \
-    --output table
+    aws ec2 describe-instances --instance-ids $instances --filters 'Name=instance-state-name,Values=running' --output table \
+    --query 'Reservations[].Instances[].{Name: Tags[?Key==`Name`].Value | [0],Size:InstanceType,ID:InstanceId}'
   }; f
 
 # List VPC Peers
@@ -197,6 +196,5 @@ ebs-volumes = ec2 describe-volumes \
 
 # List EC2 Security Groups
 open-security-groups = ec2 describe-security-groups \
-    --filters "Name=ip-permission.to-port,Values=22"  \
-    --query 'SecurityGroups[?length(IpPermissions[?ToPort==`22` && contains(IpRanges[].CidrIp, `0.0.0.0/0`)]) > `0`].{GroupName: GroupName, TagName: Tags[?Key==`Name`].Value | [0]}' \
-    --output table
+    --filters "Name=ip-permission.to-port,Values=22" --output table \
+    --query 'SecurityGroups[?length(IpPermissions[?ToPort==`22` && contains(IpRanges[].CidrIp, `0.0.0.0/0`)]) > `0`].{GroupName: GroupName, TagName: Tags[?Key==`Name`].Value | [0]}'
