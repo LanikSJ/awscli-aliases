@@ -134,22 +134,16 @@ ip-key =
   }; f
 
 # List Image ID for an Instance ID
-image-id =
-  !f() {
-    aws ec2 describe-instances --instance-ids ${1} --query 'Reservations[].Instances[].ImageId' --output text
-  }; f
+image-id = ec2 describe-instances --instance-ids ${1} --query 'Reservations[].Instances[].ImageId' --output text
 
 # List or Set Your Region
 region =
   !f() {
-    [[ $# -eq 1 ]] && aws configure set region "$1" || aws configure get region
+    [ $# -eq 1 ] && aws configure set region "$1" || aws configure get region
   }; f
 
 # List Network ACLs
-net-acls =
-  !f() {
-    aws ec2 describe-network-acls --network-acl-ids ${1} --query 'NetworkAcls[].Entries'
-  }; f
+net-acls = ec2 describe-network-acls --network-acl-ids ${1} --query 'NetworkAcls[].Entries'
 
 # List IAM Access Keys
 iam-keys =
@@ -158,10 +152,7 @@ iam-keys =
   }; f
 
 # List All Availability Zones
-list-azs = 
-  !f() {
-    aws ec2 describe-availability-zones --region $1 --query AvailabilityZones[].ZoneName --output table
-  }; f
+list-azs = ec2 describe-availability-zones --region $1 --query AvailabilityZones[].ZoneName --output table
 
 # Docker ECR Login
 ecr-login =
