@@ -5,7 +5,7 @@ jobs:
     runs-on: macOS-latest
     steps:
     - name: Checkout Project
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Install & Generate Coverage
       run: |
         export PATH="/usr/local/opt/ccache/libexec:${HOME}/kcov/bin:$PATH"
