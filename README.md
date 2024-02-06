@@ -52,7 +52,7 @@ Output:
 
 [![Actions Status](https://github.com/LanikSJ/awscli-aliases/workflows/Docker%20Publish/badge.svg)](https://github.com/LanikSJ/awscli-aliases/actions)
 
-If you would like to try the aliases in a docker container and already have AWS CLI installed:
+If you would like to try the aliases in a docker container:
 
 ```bash
 $ docker run -v ~/.aws/credentials:/root/.aws/credentials:ro -it ghcr.io/laniksj/awscli-aliases whoami
