@@ -1,3 +1,4 @@
+# shellcheck disable=SC1035,SC1073,SC1020,SC1072
 [toplevel]
 
 whoami = sts get-caller-identity --output table
@@ -19,6 +20,13 @@ de-auth =
 name-id =
   !f() {
     aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId' \
+    --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --output text
+  }; f
+
+# Instance IP from Name
+name-ip =
+  !f() {
+    aws ec2 describe-instances --query 'Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddress' \
     --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --output text
   }; f
 
