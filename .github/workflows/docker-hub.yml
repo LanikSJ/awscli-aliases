@@ -4,9 +4,9 @@ on:
   push:
     branches: [ master ]
     paths:
+      - alias
+      - awscli.sh
       - Dockerfile
-      - entrypoint.*
-      - requirements.txt
   workflow_dispatch:
 
 env:
