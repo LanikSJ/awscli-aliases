@@ -16,20 +16,6 @@ de-auth =
     aws sts decode-authorization-message --encoded-message ${1} --output text > ~/Downloads/output.json
   }; f
 
-# Instance ID from Name
-name-id =
-  !f() {
-    aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId' \
-    --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --output text
-  }; f
-
-# Instance IP from Name
-name-ip =
-  !f() {
-    aws ec2 describe-instances --query 'Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddress' \
-    --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --output text
-  }; f
-
 # Instance DNS from ID
 id-dns =
   !f() {
@@ -85,11 +71,18 @@ name-dns =
     --query 'Reservations[].Instances[].PrivateDnsName' --output text
   }; f
 
+# Instance ID from Instance Name
+name-id =
+  !f() {
+    aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId' \
+    --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --output text
+  }; f
+
 # Instance IP from Instance Name
 name-ip =
   !f() {
-    aws ec2 describe-instances --filters Name=tag:Name,Values=${1} Name=instance-state-name,Values=running \
-    --query 'Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddresses[].PrivateIpAddress' --output text
+    aws ec2 describe-instances --query 'Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddress' \
+    --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --output text
   }; f
 
 # List KeyName using Instance Name
