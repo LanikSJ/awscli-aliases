@@ -11,7 +11,7 @@ on:
 
 env:
   REGISTRY: laniksj
-  IMAGE_NAME: awscli-aliases
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build-and-push-image:
