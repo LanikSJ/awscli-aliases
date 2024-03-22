@@ -51,7 +51,6 @@ Output:
 ## Docker
 
 [![docker-publish](https://github.com/LanikSJ/awscli-aliases/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/LanikSJ/awscli-aliases/actions/workflows/docker-publish.yml)
-[![docker-hub](https://github.com/LanikSJ/awscli-aliases/actions/workflows/docker-hub.yml/badge.svg)](https://github.com/LanikSJ/awscli-aliases/actions/workflows/docker-hub.yml)
 
 If you would like to try the aliases in a docker container:
 
