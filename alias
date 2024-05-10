@@ -13,7 +13,7 @@ ami-owner =
 # Decode Authorization Message
 de-auth =
   !f() {
-    aws sts decode-authorization-message --encoded-message ${1} --output table > ~/Downloads/output.json
+    aws sts decode-authorization-message --encoded-message ${1} --output text > ~/Downloads/output.json
   }; f
 
 # Instance DNS from ID
