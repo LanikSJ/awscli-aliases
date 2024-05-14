@@ -4,190 +4,98 @@
 whoami = sts get-caller-identity --output table
 
 # AMI Owner
-ami-owner =
-  !f() {
-    aws ec2 describe-instances --filters Name=image-id,Values=${1} --query \
-    'Reservations[].Instances[].{Owner: Tags[?Key==`owner`].Value | [0],ID:InstanceId}' --output table
-  }; f
+ami-owner = !f() { aws ec2 describe-instances --filters Name=image-id,Values=${1} --query 'Reservations[].Instances[].{Owner: Tags[?Key==`owner`].Value | [0],ID:InstanceId}' --ouptput table; }; f
 
 # Decode Authorization Message
-de-auth =
-  !f() {
-    aws sts decode-authorization-message --encoded-message ${1} --output text > ~/Downloads/output.json
-  }; f
+de-auth = !f() { aws sts decode-authorization-message --encoded-message ${1} --output text > ~/Downloads/output.json; }; f
 
 # Instance DNS from ID
-id-dns =
-  !f() {
-    aws ec2 describe-instances --instance-ids ${1} --query \
-    'Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddresses[].PrivateDnsName' --output table
-  }; f
+id-dns = !f() { aws ec2 describe-instances --instance-ids ${1} --query 'Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddresses[].PrivateDnsName' --ouptput table; }; f
 
 # Instance ENI from ID
-id-eni =
-  !f() {
-    aws ec2 describe-instances --instance-ids ${1} \
-    --query 'Reservations[].Instances[].NetworkInterfaces[].NetworkInterfaceId' --output table
-  }; f
+id-eni = !f() { aws ec2 describe-instances --instance-ids ${1} --query 'Reservations[].Instances[].NetworkInterfaces[].NetworkInterfaceId' --ouptput table; }; f
 
 # Instance Name from Instance ID
-id-name =
-  !f() {
-    aws ec2 describe-instances --instance-ids ${1} \
-    --query 'Reservations[].Instances[].Tags[?Key==`Name`].Value' --output table
-  }; f
+id-name = !f() { aws ec2 describe-instances --instance-ids ${1} --query 'Reservations[].Instances[].Tags[?Key==`Name`].Value' --ouptput table; }; f
 
 # Instance KeyName from Instance ID
-id-key =
-  !f() {
-    aws ec2 describe-instances --instance-ids ${1} \
-    --query 'Reservations[].Instances[].KeyName' --output table
-  }; f
+id-key = !f() { aws ec2 describe-instances --instance-ids ${1} --query 'Reservations[].Instances[].KeyName' --ouptput table; }; f
 
 # Instance ID from DNS Name
-dns-id =
-  !f() {
-    aws ec2 describe-instances --filters Name=private-dns-name,Values=${1} \
-    --query 'Reservations[].Instances[].InstanceId' --output table
-  }; f
+dns-id = !f() { aws ec2 describe-instances --filters Name=private-dns-name,Values=${1} --query 'Reservations[].Instances[].InstanceId' --ouptput table; }; f
 
 # Get SG ID from SG Name
-sg-id =
-  !f() {
-    aws ec2 describe-security-groups --filters Name=group-name,Values=${1} \
-    --query 'SecurityGroups[].GroupId' --output table
-  }; f
+sg-id = !f() { aws ec2 describe-security-groups --filters Name=group-name,Values=${1} --query 'SecurityGroups[].GroupId' --ouptput table; }; f
 
 # List SG Rules from SG ID
-sg-rules =
-  !f() {
-    aws ec2 describe-security-groups --group-ids ${1} --query 'SecurityGroups[].IpPermissions'
-  }; f
+sg-rules = !f() { aws ec2 describe-security-groups --group-ids ${1} --query 'SecurityGroups[].IpPermissions' --ouptput table; }; f
 
 # Instance Name from Instance Name
-name-dns =
-  !f() {
-    aws ec2 describe-instances --filters Name=tag:Name,Values=${1} Name=instance-state-name,Values=running \
-    --query 'Reservations[].Instances[].PrivateDnsName' --output table
-  }; f
+name-dns = !f() { aws ec2 describe-instances --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --query 'Reservations[].Instances[].PrivateDnsName' --ouptput table; }; f
 
 # Instance ID from Instance Name
-name-id =
-  !f() {
-    aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId' \
-    --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --output table
-  }; f
+name-id = !f() { aws ec2 describe-instances --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --query 'Reservations[].Instances[].InstanceId' --ouptput table; }; f
 
 # Instance IP from Instance Name
-name-ip =
-  !f() {
-    aws ec2 describe-instances --query 'Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddress' \
-    --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --output table
-  }; f
+name-ip = !f() { aws ec2 describe-instances --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --query 'Reservations[].Instances[].{Instance:InstanceId,AZ:Placement.AvailabilityZone,IP:PrivateIpAddress,DNS:PrivateDnsName,Name:Tags[?Key==`Name`]|[0].Value}' --output table; }; f
 
 # List KeyName using Instance Name
-name-key =
-  !f() {
-    aws ec2 describe-instances --filters Name=tag:Name,Values=${1} Name=instance-state-name,Values=running \
-    --query 'Reservations[].Instances[].KeyName' --output table
-  }; f
+name-key = !f() { aws ec2 describe-instances --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --query 'Reservations[].Instances[].KeyName' --ouptput table; }; f
 
 # List of Machines Matching a Name
-name-list =
-  !f() {
-    aws ec2 describe-instances --filters Name=tag:Name,Values=${1} Name=instance-state-name,Values=running \
-    --query 'Reservations[].Instances[].Tags[?Key==`Name`].Value' --output table
-  }; f
+name-ip = !f() { aws ec2 describe-instances --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --query 'Reservations[].Instances[].{Instance:InstanceId,AZ:Placement.AvailabilityZone,IP:PrivateIpAddress,DNS:PrivateDnsName,Name:Tags[?Key==`Name`]|[0].Value}' --output table; }; f
 
 # Instance ID from Instance IP
-ip-id =
-  !f() {
-    aws ec2 describe-instances --filters Name=network-interface.addresses.private-ip-address,Values=${1} \
-    --query 'Reservations[].Instances[].InstanceId' --output table
-  }; f
+ip-id = !f() { aws ec2 describe-instances --filters Name=network-interface.addresses.private-ip-address,Values=${1} --query 'Reservations[].Instances[].InstanceId' --ouptput table; }; f
 
 # Instance Name from Private IP
-ip-name =
-  !f() {
-    aws ec2 describe-instances --filters Name=network-interface.addresses.private-ip-address,Values=${1} \
-    --query 'Reservations[].Instances[].Tags[?Key==`Name`].Value' --output table
-  }; f
+ip-name = !f() { aws ec2 describe-instances --filters Name=network-interface.addresses.private-ip-address,Values=${1} --query 'Reservations[].Instances[].Tags[?Key==`Name`].Value' --output table; }; f
 
 # Instance DNS from Private IP
-ip-dns =
-  !f() {
-    aws ec2 describe-instances --query 'Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddresses[].PrivateDnsName' \
-    --filters Name=network-interface.addresses.private-ip-address,Values=${1} --output table
-  }; f
+ip-dns = !f() { aws ec2 describe-instances --filters Name=network-interface.addresses.private-ip-address,Values=${1} --query 'Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddresses[].PrivateDnsName'  --output table; }; f
 
 # SecurityGroup ID from Private IP
-ip-sgid =
-  !f() {
-    aws ec2 describe-instances --query 'Reservations[].Instances[].SecurityGroups[].GroupId' \
-    --filters Name=network-interface.addresses.private-ip-address,Values=${1} --output table
-  }; f
+ip-sgid = !f() { aws ec2 describe-instances --filters Name=network-interface.addresses.private-ip-address,Values=${1} --query 'Reservations[].Instances[].SecurityGroups[].GroupId' --output table; }; f
 
 # Instance Key from Private IP
-ip-key =
-  !f() {
-    aws ec2 describe-instances --filters Name=network-interface.addresses.private-ip-address,Values=${1} \
-    --query 'Reservations[].Instances[].KeyName' --output table
-  }; f
+ip-key = !f() { aws ec2 describe-instances --filters Name=network-interface.addresses.private-ip-address,Values=${1} --query 'Reservations[].Instances[].KeyName' --output table; }; f
 
 # List Image ID for an Instance ID
-image-id = ec2 describe-instances --instance-ids ${1} --query 'Reservations[].Instances[].ImageId' --output table
+image-id = ec2 describe-instances --instance-ids $1 --query 'Reservations[].Instances[].ImageId' --output table
 
 # List or Set Your Region
-region =
-  !f() {
-    [ $# -eq 1 ] && aws configure set region "$1" || aws configure get region
-  }; f
+region = !f() { [ $# -eq 1 ] && aws configure set region "$1" || aws configure get region; }; f
 
 # List Network ACLs
-net-acls = ec2 describe-network-acls --network-acl-ids ${1} --query 'NetworkAcls[].Entries'
+net-acls = ec2 describe-network-acls --network-acl-ids $1 --query 'NetworkAcls[].Entries'
 
 # List IAM Access Keys
-iam-keys =
-  !f() {
-    for user in $(aws iam list-users --output text | awk '{print $NF}'); do aws iam list-access-keys --user $user --output table; done
-  }; f
+iam-keys = !f() { for user in $(aws iam list-users --output text | awk '{print $NF}'); do aws iam list-access-keys --user $user --output table; done; }; f
 
 # List All Availability Zones
 list-azs = ec2 describe-availability-zones --region $1 --query AvailabilityZones[].ZoneName --output table
 
 # Docker ECR Login
-ecr-login =
-  !f() {
-    endpoint=$(aws ecr get-authorization-token --output text --query 'authorizationData[].proxyEndpoint')
+ecr-login = !f() { endpoint=$(aws ecr get-authorization-token --output text --query 'authorizationData[].proxyEndpoint')
     passwd=$(aws ecr get-authorization-token --output text --query 'authorizationData[].authorizationToken' | base64 --decode | cut -d: -f2)
-    echo $passwd| docker login -u AWS --password-stdin $endpoint
-  }; f
+    echo $passwd| docker login -u AWS --password-stdin $endpoint; }; f
 
 # Instance Size by Name
-instance-size =
-  !f() {
-    instances=$(aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId' --filters "Name=tag:Name,Values='${1}'" --output text)
+instance-size = !f() { instances=$(aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId' --filters "Name=tag:Name,Values='${1}'" --output text)
     aws ec2 describe-instances --instance-ids $instances --filters 'Name=instance-state-name,Values=running' --output table \
-    --query 'Reservations[].Instances[].{Name: Tags[?Key==`Name`].Value | [0],Size:InstanceType,ID:InstanceId}'
-  }; f
+    --query 'Reservations[].Instances[].{Name: Tags[?Key==`Name`].Value | [0],Size:InstanceType,ID:InstanceId}'; }; f
 
 # List VPC Peers
-vpc-peers =
-  !f() {
-    aws ec2 describe-vpc-peering-connections \
-    --query 'VpcPeeringConnections[].Tags[?Key==`Name`].Value' --output text | xargs -n1 | sort -d
-  }; f
+vpc-peers = ec2 describe-vpc-peering-connections --query 'VpcPeeringConnections[].Tags[?Key==`Name`].Value' --output text | xargs -n1 | sort -d
 
 # List EC2 Instances
 running-instances = ec2 describe-instances --filter Name=instance-state-name,Values=running --output table \
     --query 'Reservations[].Instances[].{ID: InstanceId,Hostname: PublicDnsName,Name: Tags[?Key==`Name`].Value | [0],Type: InstanceType, Platform: Platform || `Linux`}'
 
 # List EC2 Volumes
-ebs-volumes = ec2 describe-volumes \
-    --query 'Volumes[].{VolumeId: VolumeId,State: State,Size: Size,Name: Tags[0].Value,AZ: AvailabilityZone}' --output table
+ebs-volumes = ec2 describe-volumes --query 'Volumes[].{VolumeId: VolumeId,State: State,Size: Size,Name: Tags[0].Value,AZ: AvailabilityZone}' --output table
 
 # List EC2 Security Groups
-open-security-groups = ec2 describe-security-groups \
-    --filters "Name=ip-permission.to-port,Values=22" --output table \
+open-security-groups = ec2 describe-security-groups --filters "Name=ip-permission.to-port,Values=22" --output table \
     --query 'SecurityGroups[?length(IpPermissions[?ToPort==`22` && \
     contains(IpRanges[].CidrIp, `0.0.0.0/0`)]) > `0`].{GroupName: GroupName, TagName: Tags[?Key==`Name`].Value | [0]}'
