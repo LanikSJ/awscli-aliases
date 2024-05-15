@@ -43,7 +43,7 @@ name-ip = !f() { aws ec2 describe-instances --filters Name=instance-state-name,V
 name-key = !f() { aws ec2 describe-instances --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --query 'Reservations[].Instances[].KeyName' --ouptput table; }; f
 
 # List of Machines Matching a Name
-name-ip = !f() { aws ec2 describe-instances --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --query 'Reservations[].Instances[].{Instance:InstanceId,AZ:Placement.AvailabilityZone,IP:PrivateIpAddress,DNS:PrivateDnsName,Name:Tags[?Key==`Name`]|[0].Value}' --output table; }; f
+name-list = !f() { aws ec2 describe-instances --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --query 'Reservations[].Instances[].{Instance:InstanceId,AZ:Placement.AvailabilityZone,IP:PrivateIpAddress,DNS:PrivateDnsName,Name:Tags[?Key==`Name`]|[0].Value}' --output table; }; f
 
 # Instance ID from Instance IP
 ip-id = !f() { aws ec2 describe-instances --filters Name=network-interface.addresses.private-ip-address,Values=${1} --query 'Reservations[].Instances[].InstanceId' --ouptput table; }; f
@@ -90,7 +90,7 @@ vpc-peers = ec2 describe-vpc-peering-connections --query 'VpcPeeringConnections[
 
 # List EC2 Instances
 running-instances = ec2 describe-instances --filter Name=instance-state-name,Values=running --output table \
-    --query 'Reservations[].Instances[].{ID: InstanceId,Hostname: PublicDnsName,Name: Tags[?Key==`Name`].Value | [0],Type: InstanceType, Platform: Platform || `Linux`}'
+  --query 'Reservations[].Instances[].{ID: InstanceId,Hostname: PublicDnsName,Name: Tags[?Key==`Name`].Value | [0],Type: InstanceType, Platform: Platform || `Linux`}'
 
 # List EC2 Volumes
 ebs-volumes = ec2 describe-volumes --query 'Volumes[].{VolumeId: VolumeId,State: State,Size: Size,Name: Tags[0].Value,AZ: AvailabilityZone}' --output table
