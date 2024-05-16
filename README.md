@@ -46,7 +46,7 @@ Output:
 
     {
         "Account": "1234567890",
-        "UserId": "AROAJGILZWBHUUPCERBWY",
+        "UserId": "ABCDEFGHIJKLMNOPQRSTUV",
         "Arn": "arn:aws:sts::1234567890:user/UserId"
     }
 
