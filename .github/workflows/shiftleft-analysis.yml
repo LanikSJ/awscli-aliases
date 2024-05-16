@@ -1,12 +1,12 @@
 name: shiftleft-analysis
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
-    branches:
-      - master
+    branches: [ master ]
+    paths:
+      - alias
+      - awscli.sh
+      - Dockerfile
 
 jobs:
   scan-build:
