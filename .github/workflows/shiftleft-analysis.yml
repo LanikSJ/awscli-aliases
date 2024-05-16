@@ -1,6 +1,12 @@
 name: shiftleft-analysis
 
-on: pull_request
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   scan-build:
@@ -17,7 +23,7 @@ jobs:
         SCAN_AUTO_BUILD: true
       with:
         output: reports
-        type: "credscan,bash"
+        type: credscan,bash
     
     - name: Upload report
       uses: github/codeql-action/upload-sarif@v3
