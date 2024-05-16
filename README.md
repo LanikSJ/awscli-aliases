@@ -20,6 +20,8 @@ AWS CLI `1.11.24` or higher, see
 
 Use `awscli.sh` script to install / update AWS CLI if yours is out of date. Use `aws --version` to verify.
 
+More detailed Installation and Usage Instructions are available in the [Wiki](https://github.com/LanikSJ/awscli-aliases/wiki).
+
 ## Usage
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ae3e23f1514c42c897423d3e23544b55)](https://www.codacy.com/gh/LanikSJ/awscli-aliases/dashboard?utm_source=github.com&utm_medium=referral&utm_content=LanikSJ/awscli-aliases&utm_campaign=Badge_Grade)
