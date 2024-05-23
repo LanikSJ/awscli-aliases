@@ -1,17 +1,17 @@
 name: docker-hub
 
 on:
-  # push:
-  #   branches: [ master ]
-  #   paths:
-  #     - alias
-  #     - awscli.sh
-  #     - Dockerfile
+  push:
+    branches: [ master ]
+    paths:
+      - alias
+      - awscli.sh
+      - Dockerfile
   workflow_dispatch:
 
 env:
   REGISTRY: laniksj
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: awscli-aliasses
 
 jobs:
   build-and-push-image:
@@ -34,7 +34,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=latest
             type=ref,event=branch
