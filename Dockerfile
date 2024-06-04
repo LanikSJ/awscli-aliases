@@ -1,4 +1,4 @@
-FROM amazon/aws-cli:2.15.62
+FROM amazon/aws-cli:2.16.0
 
 RUN mkdir -p ~/.aws/cli
 
