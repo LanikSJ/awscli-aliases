@@ -11,7 +11,7 @@ on:
 
 jobs:
   awscli-test:
-    runs-on: macOS-latest
+    runs-on: macos-latest
 
     steps:
     - name: Checkout Project
@@ -21,7 +21,7 @@ jobs:
       run: |
         export PATH="/usr/local/opt/ccache/libexec:${HOME}/kcov/bin:$PATH"
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-        echo "break-system-packages = true" > ~/pip.conf
+        mkdir -p ~/.config/pip/ && echo "break-system-packages = true" > ~/.config/pip/pip.conf
         brew install jq kcov && kcov coverage awscli.sh
         bash <(curl -s https://codecov.io/bash)
       env:
