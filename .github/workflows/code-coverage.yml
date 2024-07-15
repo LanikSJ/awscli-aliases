@@ -1,4 +1,4 @@
-name: code-coverage
+name: Code Coverage
 
 on: 
   pull_request:
