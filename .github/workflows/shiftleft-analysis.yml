@@ -1,4 +1,4 @@
-name: shiftleft-analysis
+name: ShiftLeft Analysis
 
 on:
   pull_request:
@@ -25,7 +25,7 @@ jobs:
         output: reports
         type: credscan,bash
     
-    - name: Upload report
+    - name: Upload Report
       uses: github/codeql-action/upload-sarif@v3
       with:
         sarif_file: reports
