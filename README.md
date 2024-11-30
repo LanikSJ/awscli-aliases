@@ -58,7 +58,7 @@ Output:
 If you would like to try the aliases in a docker container:
 
 ```bash
-$ docker run -v ~/.aws/credentials:/root/.aws/credentials:ro -it ghcr.io/laniksj/awscli-aliases whoami
+docker run -v ~/.aws/credentials:/home/redhat/.aws/credentials:ro -it ghcr.io/laniksj/awscli-aliases whoami
 ```
 
 ## Bugs
