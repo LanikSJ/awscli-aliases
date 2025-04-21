@@ -37,7 +37,7 @@ name-dns = !f() { aws ec2 describe-instances --filters Name=instance-state-name,
 name-id = !f() { aws ec2 describe-instances --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --query 'Reservations[].Instances[].InstanceId' --ouptput table; }; f
 
 # Instance IP from Instance Name
-name-ip = !f() { aws ec2 describe-instances --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --query 'Reservations[].Instances[].{Instance:InstanceId,AZ:Placement.AvailabilityZone,IP:PrivateIpAddress,DNS:PrivateDnsName,Name:Tags[?Key==`Name`]|[0].Value}' --output table; }; f
+name-ip = !f() { aws ec2 describe-instances --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --query 'Reservations[].Instances[].{Instance:InstanceId,AZ:Placement.AvailabilityZone,IP:PrivateIpAddress,DNS:PrivateDnsName,LaunchTime:LaunchTime,Name:Tags[?Key==`Name`]|[0].Value}' --output table; }; f
 
 # List KeyName using Instance Name
 name-key = !f() { aws ec2 describe-instances --filters Name=instance-state-name,Values=running Name=tag:Name,Values=${1} --query 'Reservations[].Instances[].KeyName' --ouptput table; }; f
