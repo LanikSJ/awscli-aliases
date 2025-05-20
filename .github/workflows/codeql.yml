@@ -19,6 +19,7 @@ jobs:
       contents: read
     env:
       CODEQL_ACTION_FEATURE_MULTI_LANGUAGE: false
+      CODEQL_ACTION_FEATURE_DEFAULT_SETUP: false
     strategy:
       fail-fast: false
       matrix:
