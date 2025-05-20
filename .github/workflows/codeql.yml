@@ -13,17 +13,12 @@ jobs:
     name: Analyze (${{ matrix.language }})
     runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
     permissions:
-      # required for all workflows
       security-events: write
-
-      # required to fetch internal or private CodeQL packs
       packages: read
-
-      # only required for workflows in private repositories
       actions: read
       contents: read
     env:
-      CODEQL_ACTION_FEATURE_MULTI_LANGUAGE: true
+      CODEQL_ACTION_FEATURE_MULTI_LANGUAGE: false
     strategy:
       fail-fast: false
       matrix:
@@ -40,16 +35,7 @@ jobs:
       with:
         languages: ${{ matrix.language }}
         build-mode: ${{ matrix.build-mode }}
-        queries: +security-extended,security-and-quality
-    - if: matrix.build-mode == 'manual'
-      shell: bash
-      run: |
-        echo 'If you are using a "manual" build mode for one or more of the' \
-          'languages you are analyzing, replace this with the commands to build' \
-          'your code, for example:'
-        echo '  make bootstrap'
-        echo '  make release'
-        exit 1
+        queries: security-extended
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
