@@ -1,4 +1,5 @@
 name: Code Coverage
+
 permissions:
   contents: read
 

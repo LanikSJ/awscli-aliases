@@ -18,9 +18,11 @@
 ## 📦 Requirements
 
 AWS CLI `1.11.24` or higher, see
-[AWS CLI User Guide](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) for more info.
+[AWS CLI User Guide](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
+for more info.
 
-Use `awscli.sh` script to install / update AWS CLI if yours is out of date. Use `aws --version` to verify.
+Use `awscli.sh` script to install / update AWS CLI if yours is out of date.
+Use `aws --version` to verify.
 
 More detailed Installation and Usage Instructions are available in the [Wiki](https://github.com/LanikSJ/awscli-aliases/wiki).
 
@@ -62,7 +64,9 @@ Output:
 If you would like to try the aliases in a docker container:
 
 ```bash
-docker run -v ~/.aws/credentials:/home/redhat/.aws/credentials:ro -it ghcr.io/laniksj/awscli-aliases whoami
+docker run \
+  -v ~/.aws/credentials:/home/redhat/.aws/credentials:ro \
+  -it ghcr.io/laniksj/awscli-aliases whoami
 ```
 
 ## 🐛 Bugs
