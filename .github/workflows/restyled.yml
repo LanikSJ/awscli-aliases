@@ -1,8 +1,8 @@
 name: Restyled
 
-permissions:
-  contents: write
-  pull-requests: write
+# permissions:
+#   contents: write
+#   pull-requests: write
 
 on:
   pull_request:
@@ -35,15 +35,11 @@ jobs:
           fail-on-differences: true
 
       - if: ${{ !cancelled() && steps.restyler.outputs.success == 'true' }}
-        uses: peter-evans/create-pull-request@v7
+        name: Upload restyled results
+        uses: actions/upload-artifact@v3
         with:
-          base: ${{ steps.restyler.outputs.restyled-base }}
-          branch: ${{ steps.restyler.outputs.restyled-head }}
-          title: ${{ steps.restyler.outputs.restyled-title }}
-          body: ${{ steps.restyler.outputs.restyled-body }}
-          labels: "restyled"
-          reviewers: ${{ github.event.pull_request.user.login }}
-          delete-branch: true
+          name: restyled-results
+          path: ${{ steps.restyler.outputs.restyled-head }}
 
   # For forks, we will only run (and print git-am instructions)
   restyled-fork:
