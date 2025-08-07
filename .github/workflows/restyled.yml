@@ -1,9 +1,5 @@
 name: Restyled
 
-# permissions:
-#   contents: write
-#   pull-requests: write
-
 on:
   pull_request:
     types:
@@ -36,7 +32,7 @@ jobs:
 
       - if: ${{ !cancelled() && steps.restyler.outputs.success == 'true' }}
         name: Upload restyled results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: restyled-results
           path: ${{ steps.restyler.outputs.restyled-head }}
