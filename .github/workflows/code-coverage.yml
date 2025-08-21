@@ -23,6 +23,9 @@ jobs:
     
     - name: Install Dependencies and Run Tests
       run: |
+        # Change to the awscli-aliases directory
+        cd LanikSJ/awscli-aliases/
+
         # Install Homebrew (if not already installed) and jq, python3, kcov
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" || true
         brew install jq python3 kcov
@@ -32,15 +35,15 @@ jobs:
         echo "break-system-packages = true" >> ~/.config/pip/pip.conf
 
         # Download shunit2
-        curl -sSL https://raw.githubusercontent.com/kward/shunit2/master/shunit2 -o LanikSJ/awscli-aliases/shunit2
-        chmod +x LanikSJ/awscli-aliases/shunit2
+        curl -sSL https://raw.githubusercontent.com/kward/shunit2/master/shunit2 -o shunit2
+        chmod +x shunit2
 
         # Generate coverage for awscli.sh (this will execute awscli.sh once)
         # The output will be in kcov-output/
-        kcov LanikSJ/awscli-aliases/kcov-output LanikSJ/awscli-aliases/awscli.sh
+        kcov kcov-output awscli.sh
 
         # Run unit tests
-        bash LanikSJ/awscli-aliases/test_awscli.sh
+        bash test_awscli.sh
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
