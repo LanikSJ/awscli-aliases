@@ -206,4 +206,5 @@ test_unsupported_os_aws_outdated() {
 
 # Source shunit2. This must be at the very end of the file.
 # Make sure shunit2 is accessible, e.g., by downloading it to the same directory.
+# shellcheck disable=SC1091
 . ./shunit2
