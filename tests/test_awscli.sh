@@ -97,7 +97,7 @@ jq() { mock_jq "$@"; }
 brew() { mock_brew "$@"; }
 apt-get() { mock_apt_get "$@"; }
 yum() { mock_yum "$@"; }
-log_message() { echo "$@"; } # Mock log_message to simply echo, allowing capture by test functions
+log_message() { echo "$@"; }                                   # Mock log_message to simply echo, allowing capture by test functions
 export -f uname which aws curl jq brew apt-get yum log_message # Export mocks for subshells
 
 # Source the script to be tested
@@ -122,7 +122,7 @@ test_darwin_brew_not_installed() {
   MOCKED_AWS_EXISTS="false" # Simulate no AWS CLI initially
 
   # Execute the script and capture its output
-  output=$( ( . ../awscli.sh ) 2>&1 )
+  output=$( (. ../awscli.sh ) 2>&1)
 
   # Assertions
   assertContains "$output" "AWS CLI not found. Installing..."
@@ -135,7 +135,7 @@ test_darwin_brew_installed_aws_outdated() {
   MOCKED_AWS_EXISTS="true"
   MOCKED_AWS_VERSION="2.13.0" # Older version
 
-  output=$( ( . ../awscli.sh ) 2>&1 )
+  output=$( (. ../awscli.sh) 2>&1)
 
   assertContains "$output" "Your AWS CLI version is: 2.13.0"
   assertContains "$output" "Your AWS CLI version (2.13.0) is outdated. Updating to 2.14.0..."
@@ -145,7 +145,7 @@ test_ubuntu_aws_not_installed() {
   MOCKED_UNAME="Ubuntu"
   MOCKED_AWS_EXISTS="false"
 
-  output=$( ( . ../awscli.sh ) 2>&1 )
+  output=$( (. ../awscli.sh) 2>&1)
 
   assertContains "$output" "AWS CLI not found. Installing..."
 }
@@ -155,7 +155,7 @@ test_redhat_aws_up_to_date() {
   MOCKED_AWS_EXISTS="true"
   MOCKED_AWS_VERSION="2.14.0" # Up to date version
 
-  output=$( ( . ../awscli.sh ) 2>&1 )
+  output=$( (. ../awscli.sh) 2>&1)
 
   assertContains "$output" "Your AWS CLI version is: 2.14.0"
   assertContains "$output" "Your version of AWS CLI is up to date! Nothing to do."
@@ -166,7 +166,7 @@ test_centos_aws_outdated() {
   MOCKED_AWS_EXISTS="true"
   MOCKED_AWS_VERSION="2.10.0" # Older version
 
-  output=$( ( . ../awscli.sh ) 2>&1 )
+  output=$( (. ../awscli.sh) 2>&1)
 
   assertContains "$output" "Your AWS CLI version is: 2.10.0"
   assertContains "$output" "Your AWS CLI version (2.10.0) is outdated. Updating to 2.14.0..."
@@ -176,7 +176,7 @@ test_unsupported_os_no_aws() {
   MOCKED_UNAME="FreeBSD" # Unsupported OS
   MOCKED_AWS_EXISTS="false"
 
-  output=$( ( . ../awscli.sh ) 2>&1 )
+  output=$( (. ../awscli.sh) 2>&1)
   exit_code=$?
 
   assertContains "$output" "Unsupported OS for AWS CLI installation. Please install manually."
@@ -188,7 +188,7 @@ test_unsupported_os_aws_outdated() {
   MOCKED_AWS_EXISTS="true"
   MOCKED_AWS_VERSION="2.10.0" # Older version
 
-  output=$( ( . ../awscli.sh ) 2>&1 )
+  output=$( (. ../awscli.sh) 2>&1)
   exit_code=$?
 
   assertContains "$output" "Unsupported OS for AWS CLI update. Please update manually."
