@@ -42,8 +42,7 @@ mock_aws() {
 
 mock_curl() {
   if [[ "$1" == "-fsSL" && "$2" == "https://raw.githubusercontent.com/Homebrew/install/master/install" ]]; then
-    touch homebrew_install_called.tmp # Create a marker file
-    echo "Mock Homebrew install script" # Still echo for ruby -e
+    echo "HOMEBREW_INSTALL_SCRIPT_EXECUTED" # Output a specific string for assertion
     return 0
   elif [[ "$1" == "-sSL" && "$2" == "https://api.github.com/repos/aws/aws-cli/tags" ]]; then
     echo '[{"name": "2.15.0"}, {"name": "2.14.0"}]' # Mock latest and current
@@ -113,7 +112,6 @@ setUp() {
   MOCKED_BREW_EXISTS="true"
   MOCKED_AWS_EXISTS="true"
   MOCKED_AWS_VERSION=""
-  rm -f homebrew_install_called.tmp # Clean up marker file
   # Clear environment variables that the script might set
   unset AWSVERSION AWSCURRENT
 }
@@ -128,7 +126,7 @@ test_darwin_brew_not_installed() {
 
   # Assertions
   assertContains "$output" "AWS CLI not found. Installing..."
-  assertTrue "Homebrew install curl was called" "[ -f homebrew_install_called.tmp ]"
+  assertContains "$output" "HOMEBREW_INSTALL_SCRIPT_EXECUTED"
 }
 
 test_darwin_brew_installed_aws_outdated() {
