@@ -36,7 +36,7 @@ jobs:
         chmod +x shunit2
 
         # Run unit tests and generate coverage
-        kcov kcov-output tests/test_awscli.sh
+        kcov kcov-output test_awscli.sh
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
