@@ -32,7 +32,8 @@ jobs:
         echo "break-system-packages = true" >> ~/.config/pip/pip.conf
 
         # Download shunit2
-        curl -sSL https://raw.githubusercontent.com/kward/shunit2/master/shunit2 > LanikSJ/awscli-aliases/shunit2
+        curl -sSL https://raw.githubusercontent.com/kward/shunit2/master/shunit2 -o LanikSJ/awscli-aliases/shunit2
+        chmod +x LanikSJ/awscli-aliases/shunit2
 
         # Generate coverage for awscli.sh (this will execute awscli.sh once)
         # The output will be in kcov-output/
