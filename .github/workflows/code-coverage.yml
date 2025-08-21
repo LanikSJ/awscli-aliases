@@ -46,4 +46,5 @@ jobs:
       uses: codecov/codecov-action@v4
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
+        directory: ./kcov-output # Directory where kcov outputs reports, relative to working-directory
         fail_ci_if_error: true # Optional: fail CI if Codecov upload fails
