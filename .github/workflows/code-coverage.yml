@@ -22,7 +22,6 @@ jobs:
       uses: actions/checkout@v5
     
     - name: Install Dependencies and Run Tests
-      working-directory: LanikSJ/awscli-aliases/
       run: |
         # Install Homebrew (if not already installed) and jq, python3, kcov
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" || true
@@ -47,5 +46,4 @@ jobs:
       uses: codecov/codecov-action@v4
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        directory: ./LanikSJ/awscli-aliases/kcov-output # Directory where kcov outputs reports
         fail_ci_if_error: true # Optional: fail CI if Codecov upload fails
