@@ -2,17 +2,55 @@
 # This script will install/Update AWS CLI
 
 # Install / Update Function
+if [[ "$(uname)" == "Darwin" ]]; then
+  if ! which brew >/dev/null; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+  brew install jq python3
+fi
 
-if [[ uname == "Darwin" ]]; then which brew >/dev/null && if [[ "$?" != "0" ]]; then /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; fi && brew install jq python3; fi
+if [[ "$(uname)" == "Ubuntu" ]]; then
+  apt-get install python3 jq
+fi
 
-if [[ uname == "Ubuntu" ]]; then apt-get install python3 jq; fi
-
-if [[ uname == "RedHat" ]] || [[ uname == "CentOS" ]]; then yum -y install python3 jq; fi
+if [[ "$(uname)" == "RedHat" ]] || [[ "$(uname)" == "CentOS" ]]; then
+  yum -y install python3 jq
+fi
 
 # Variables
-export AWSVERSION=$(aws --version | awk -F"/" '{print $2}' | sed 's/ Python//')
-export AWSCURRENT=$(curl -sSL https://api.github.com/repos/aws/aws-cli/tags | jq -e -r '.[1].name')
+AWSVERSION=$(aws --version | awk -F"/" '{print $2}' | sed 's/ Python//')
+export AWSVERSION
+AWSCURRENT=$(curl -sSL https://api.github.com/repos/aws/aws-cli/tags | jq -e -r '.[1].name')
+export AWSCURRENT
 
-if [[ -z $AWSVERSION ]]; then pip3 install -U awscli; else echo "Your AWS CLI version is: $AWSVERSION"; fi
+if [[ -z $AWSVERSION ]]; then
+  echo "AWS CLI not found. Installing..."
+  if [[ "$(uname)" == "Darwin" ]]; then
+    brew install awscli
+  elif [[ "$(uname)" == "Ubuntu" ]]; then
+    apt-get install awscli
+  elif [[ "$(uname)" == "RedHat" ]] || [[ "$(uname)" == "CentOS" ]]; then
+    yum install -y awscli
+  else
+    echo "Unsupported OS for AWS CLI installation. Please install manually."
+    exit 1
+  fi
+else
+  echo "Your AWS CLI version is: $AWSVERSION"
+fi
 
-if [[ $AWSVERSION < "$AWSCURRENT" ]]; then pip3 install -U awscli; else echo "Your version of AWS CLI is up to date! Nothing to do. "; fi
+if [[ $AWSVERSION < "$AWSCURRENT" ]]; then
+  echo "Your AWS CLI version ($AWSVERSION) is outdated. Updating to $AWSCURRENT..."
+  if [[ "$(uname)" == "Darwin" ]]; then
+    brew install awscli
+  elif [[ "$(uname)" == "Ubuntu" ]]; then
+    apt-get install -y awscli
+  elif [[ "$(uname)" == "RedHat" ]] || [[ "$(uname)" == "CentOS" ]]; then
+    yum install -y awscli
+  else
+    echo "Unsupported OS for AWS CLI update. Please update manually."
+    exit 1
+  fi
+else
+  echo "Your version of AWS CLI is up to date! Nothing to do. "
+fi
