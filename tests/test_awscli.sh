@@ -122,7 +122,7 @@ test_darwin_brew_not_installed() {
   MOCKED_AWS_EXISTS="false" # Simulate no AWS CLI initially
 
   # Execute the script and capture its output
-  output=$( (. ../awscli.sh ) 2>&1)
+  output=$( (. ../awscli.sh) 2>&1)
 
   # Assertions
   assertContains "$output" "AWS CLI not found. Installing..."
