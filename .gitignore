@@ -11,6 +11,12 @@
 /tmp/
 .DS_Store
 
+# kcov
+kcov-output/
+
+# shunit2
+shunit2
+
 # Used by dotenv library to load environment variables.
 # .env
 

@@ -9,6 +9,7 @@ on:
     paths:
       - alias
       - awscli.sh
+      - test_awscli.sh
       - Dockerfile
   workflow_dispatch:
 
@@ -20,13 +21,26 @@ jobs:
     - name: Checkout Project
       uses: actions/checkout@v5
     
-    - name: Install & Generate Coverage
+    - name: Install Dependencies and Run Tests
       run: |
-        export PATH="/usr/local/opt/ccache/libexec:${HOME}/kcov/bin:$PATH"
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+        # Install Homebrew (if not already installed) and kcov
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" || true
+        brew install kcov
+
+        # Configure pip for system packages
         mkdir -p ~/.config/pip/ && echo "[global]" > ~/.config/pip/pip.conf
         echo "break-system-packages = true" >> ~/.config/pip/pip.conf
-        brew install jq kcov && kcov coverage awscli.sh
-        bash <(curl -s https://codecov.io/bash)
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+        # Download shunit2
+        curl -sSL https://raw.githubusercontent.com/kward/shunit2/master/shunit2 -o shunit2
+        chmod +x shunit2
+
+        # Run unit tests and generate coverage
+        kcov kcov-output ./test_awscli.sh
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        directory: ./kcov-output # Directory where kcov outputs reports, relative to working-directory
+        fail_ci_if_error: true # Optional: fail CI if Codecov upload fails
