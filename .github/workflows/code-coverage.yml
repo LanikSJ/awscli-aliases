@@ -35,12 +35,8 @@ jobs:
         curl -sSL https://raw.githubusercontent.com/kward/shunit2/master/shunit2 -o shunit2
         chmod +x shunit2
 
-        # Generate coverage for awscli.sh (this will execute awscli.sh once)
-        # The output will be in kcov-output/
-        kcov kcov-output awscli.sh
-
-        # Run unit tests
-        cd tests && bash test_awscli.sh
+        # Run unit tests and generate coverage
+        kcov kcov-output tests/test_awscli.sh
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
