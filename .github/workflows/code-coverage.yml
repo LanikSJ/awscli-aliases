@@ -23,9 +23,9 @@ jobs:
     
     - name: Install Dependencies and Run Tests
       run: |
-        # Install Homebrew (if not already installed) and jq, python3, kcov
+        # Install Homebrew (if not already installed) and kcov
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" || true
-        brew install jq python3 kcov
+        brew install kcov
 
         # Configure pip for system packages
         mkdir -p ~/.config/pip/ && echo "[global]" > ~/.config/pip/pip.conf
@@ -40,7 +40,7 @@ jobs:
         kcov kcov-output awscli.sh
 
         # Run unit tests
-        bash test_awscli.sh
+        cd tests && bash test_awscli.sh
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
