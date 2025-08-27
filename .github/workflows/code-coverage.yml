@@ -21,7 +21,7 @@ jobs:
 
     steps:
     - name: Checkout Project
-      uses: actions/checkout@v5
+      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
     
     - name: Install Dependencies and Run Tests
       run: |
@@ -41,7 +41,7 @@ jobs:
         kcov kcov-output ./test_awscli.sh
 
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v5
+      uses: codecov/codecov-action@fdcc8476540edceab3de004e990f80d881c6cc00 # v5.5.0
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         directory: ./kcov-output # Directory where kcov outputs reports, relative to working-directory
