@@ -41,4 +41,4 @@ jobs:
         kcov kcov-output ./test_awscli.sh
 
     - name: Upload coverage to Codecov
-      run: ./codecov upload-coverage --fail-on-error --git-service github --sha ${{ github.sha }} --dir ./kcov-output --gcov-executable gcov --token ${{ secrets.CODECOV_TOKEN }}
+      run: kcov upload-coverage --fail-on-error --git-service github --sha ${{ github.sha }} --dir ./kcov-output --gcov-executable gcov --token ${{ secrets.CODECOV_TOKEN }}
