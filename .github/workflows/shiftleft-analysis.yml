@@ -14,10 +14,10 @@ jobs:
   Scan-Build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
     - name: Perform Scan
-      uses: ShiftLeftSecurity/scan-action@master
+      uses: ShiftLeftSecurity/scan-action@4d4c04908eff87430482f36340ad5706c14cf9a6 # master
       env:
         WORKSPACE: ""
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -26,6 +26,6 @@ jobs:
         output: reports
 
     - name: Upload Report
-      uses: github/codeql-action/upload-sarif@v3
+      uses: github/codeql-action/upload-sarif@3c3833e0f8c1c83d449a7478aa59c036a9165498 # v3
       with:
         sarif_file: reports
