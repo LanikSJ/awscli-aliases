@@ -41,4 +41,8 @@ jobs:
         kcov kcov-output ./test_awscli.sh
 
     - name: Upload coverage to Codecov
-      run: kcov upload-coverage --fail-on-error --git-service github --sha ${{ github.sha }} --dir ./kcov-output --gcov-executable gcov --token ${{ secrets.CODECOV_TOKEN }}
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        directory: ./kcov-output # Directory where kcov outputs reports, relative to working-directory
+        fail_ci_if_error: true # Optional: fail CI if Codecov upload fails
