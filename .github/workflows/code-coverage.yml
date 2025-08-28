@@ -13,6 +13,14 @@ on:
       - awscli.sh
       - test_awscli.sh
       - Dockerfile
+  push:
+    branches: [ master ]
+    paths:
+      - .github/workflows/code-coverage.yml
+      - alias
+      - awscli.sh
+      - test_awscli.sh
+      - Dockerfile
   workflow_dispatch:
 
 jobs:
