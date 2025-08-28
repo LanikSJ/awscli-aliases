@@ -1,5 +1,6 @@
 # 🛠️ AWS CLI Aliases
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/ae3e23f1514c42c897423d3e23544b55)](https://www.codacy.com/gh/LanikSJ/awscli-aliases/dashboard?utm_source=github.com&utm_medium=referral&utm_content=LanikSJ/awscli-aliases&utm_campaign=Badge_Grade)
 ![GitHub Repo Size](https://img.shields.io/github/repo-size/laniksj/awscli-aliases)
 ![GitHub Code Size in Bytes](https://img.shields.io/github/languages/code-size/laniksj/awscli-aliases)
 ![GitHub Last Commit](https://img.shields.io/github/last-commit/laniksj/awscli-aliases)
@@ -27,9 +28,6 @@ Use `aws --version` to verify.
 More detailed Installation and Usage Instructions are available in the [Wiki](https://github.com/LanikSJ/awscli-aliases/wiki).
 
 ## ⚡ Usage
-
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/ae3e23f1514c42c897423d3e23544b55)](https://www.codacy.com/gh/LanikSJ/awscli-aliases/dashboard?utm_source=github.com&utm_medium=referral&utm_content=LanikSJ/awscli-aliases&utm_campaign=Badge_Grade)
-[![codecov](https://codecov.io/gh/LanikSJ/awscli-aliases/branch/master/graph/badge.svg)](https://codecov.io/gh/LanikSJ/awscli-aliases)
 
 ```bash
 mkdir -p GitHub; cd GitHub
