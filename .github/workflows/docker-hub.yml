@@ -7,6 +7,10 @@ on:
       - alias
       - awscli.sh
       - Dockerfile
+  pull_request:
+    branches: [ master ]
+    paths:
+      - .github/workflows/docker-hub.yml
   workflow_dispatch:
 
 env:
