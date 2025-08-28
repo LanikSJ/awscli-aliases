@@ -1,12 +1,12 @@
 name: Docker Hub
 
 on:
-  # push:
-  #   branches: [ master ]
-  #   paths:
-  #     - alias
-  #     - awscli.sh
-  #     - Dockerfile
+  push:
+    branches: [ master ]
+    paths:
+      - alias
+      - awscli.sh
+      - Dockerfile
   workflow_dispatch:
 
 env:
