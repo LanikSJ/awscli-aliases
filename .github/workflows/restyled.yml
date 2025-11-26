@@ -23,27 +23,31 @@ jobs:
       github.event.action != 'closed' &&
       github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-
-      - uses: restyled-io/actions/setup@e3cf32c6ab87c25a80755403de9bf92fa34ab4bb # v4.4.2
-      - id: restyler
-        uses: restyled-io/actions/run@e3cf32c6ab87c25a80755403de9bf92fa34ab4bb # v4.4.2
-        with:
-          fail-on-differences: true
-
-      - if: ${{ !cancelled() && steps.restyler.outputs.success == 'true' }}
-        uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412 # v7.0.9
-        with:
-          base: ${{ steps.restyler.outputs.restyled-base }}
-          branch: ${{ steps.restyler.outputs.restyled-head }}
-          title: ${{ steps.restyler.outputs.restyled-title }}
-          body: ${{ steps.restyler.outputs.restyled-body }}
-          labels: "restyled"
-          reviewers: ${{ github.event.pull_request.user.login }}
-          delete-branch: true
+    # TODO: Refactor this workflow using a two-stage pattern.
+    # Do not checkout or execute untrusted PR code in a privileged job context.
+    # Untrusted code evaluation and artifact generation should occur in an unprivileged workflow.
+    # Privileged updates (e.g., creating pull requests) should be done in a separate workflow triggered via workflow_run.
+    # For now, these steps are commented out for security:
+    # - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+    #   with:
+    #     ref: ${{ github.event.pull_request.head.ref }}
+    #
+    # - uses: restyled-io/actions/setup@e3cf32c6ab87c25a80755403de9bf92fa34ab4bb # v4.4.2
+    # - id: restyler
+    #   uses: restyled-io/actions/run@e3cf32c6ab87c25a80755403de9bf92fa34ab4bb # v4.4.2
+    #   with:
+    #     fail-on-differences: true
+    #
+    # - if: ${{ !cancelled() && steps.restyler.outputs.success == 'true' }}
+    #   uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412 # v7.0.9
+    #   with:
+    #     base: ${{ steps.restyler.outputs.restyled-base }}
+    #     branch: ${{ steps.restyler.outputs.restyled-head }}
+    #     title: ${{ steps.restyler.outputs.restyled-title }}
+    #     body: ${{ steps.restyler.outputs.restyled-body }}
+    #     labels: "restyled"
+    #     reviewers: ${{ github.event.pull_request.user.login }}
+    #     delete-branch: true
 
   # For forks, we will only run (and print git-am instructions)
   restyled-fork:
