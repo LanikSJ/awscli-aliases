@@ -30,7 +30,7 @@ jobs:
         uses: restyled-io/actions/run@e3cf32c6ab87c25a80755403de9bf92fa34ab4bb # v4.4.2
         with:
           fail-on-differences: true
-      
+
       - if: ${{ !cancelled() && steps.restyler.outputs.success == 'true' }}
         uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412 # v7.0.9
         with:
