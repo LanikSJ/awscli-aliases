@@ -54,6 +54,7 @@ jobs:
       github.event.action != 'closed' &&
       github.event.pull_request.head.repo.full_name != github.repository
     runs-on: ubuntu-latest
+    permissions: {}
     steps:
       - name: Checkout code
         uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
