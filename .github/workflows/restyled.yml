@@ -34,14 +34,9 @@ jobs:
       - name: Save results for privileged workflow
         run: |
           mkdir -p ./pr
-          # Sanitize PR_REF (alphanumeric, -, _, / only)
-          PR_REF="${{ github.event.pull_request.head.ref }}"
-          if [[ "$PR_REF" =~ ^[a-zA-Z0-9._/-]+$ ]]; then
-            echo "$PR_REF" > ./pr/PR_REF
-          else
-            echo "Invalid characters in PR_REF" >&2
-            exit 1
-          fi
+          # Use the pull request number (trusted) as PR_REF to prevent injection/cache poisoning
+          PR_REF="${{ github.event.pull_request.number }}"
+          echo "$PR_REF" > ./pr/PR_REF
           echo "${{ steps.restyler.outputs.restyled-base }}" > ./pr/RESTYLED_BASE
           echo "${{ steps.restyler.outputs.restyled-head }}" > ./pr/RESTYLED_HEAD
           echo "${{ steps.restyler.outputs.restyled-title }}" > ./pr/RESTYLED_TITLE
