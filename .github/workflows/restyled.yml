@@ -1,8 +1,10 @@
 name: Restyled
 
+# Only set global permissions for artifact upload; restrict privileged actions to dedicated jobs
 permissions:
-  contents: write
-  pull-requests: write
+  actions: write
+  contents: read
+  pull-requests: read
 
 on:
   pull_request:
@@ -10,6 +12,10 @@ on:
       - opened
       - reopened
       - closed
+  workflow_run:
+    workflows: ["Restyled Unprivileged"]
+    types:
+      - completed
       - synchronize
 
 concurrency:
@@ -17,15 +23,61 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  restyle-pr:
-    name: Restyle PR for Main Repository
+  restyle-unprivileged:
+    name: Restyle PR Unprivileged
     if: |
-      github.event.action != 'closed' &&
-      github.event.pull_request.head.repo.full_name == github.repository
+      github.event.action != 'closed'
+    permissions: {}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
+      - name: Checkout PR Code
+      - name: Save results for privileged workflow
+        run: |
+          mkdir -p ./pr
+          echo "${{ github.event.pull_request.head.ref }}" > ./pr/PR_REF
+          echo "${{ steps.restyler.outputs.restyled-base }}" > ./pr/RESTYLED_BASE
+          echo "${{ steps.restyler.outputs.restyled-head }}" > ./pr/RESTYLED_HEAD
+          echo "${{ steps.restyler.outputs.restyled-title }}" > ./pr/RESTYLED_TITLE
+          echo "${{ steps.restyler.outputs.restyled-body }}" > ./pr/RESTYLED_BODY
+          echo "${{ github.event.pull_request.user.login }}" > ./pr/RESTYLED_REVIEWER
+        shell: bash
+      - name: Upload Restyled Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: restyled-artifacts
+          path: pr/
         uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+  restyle-privileged:
+    name: Create Restyled PR (Privileged)
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Download artifact
+        uses: actions/github-script@v6
+        with:
+          script: |
+            var artifacts = await github.actions.listWorkflowRunArtifacts({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: ${{ github.event.workflow_run.id }},
+            });
+            var matchArtifact = artifacts.data.artifacts.filter((artifact) => {
+              return artifact.name == "restyled-artifacts";
+            })[0];
+            var download = await github.actions.downloadArtifact({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              artifact_id: matchArtifact.id,
+              archive_format: 'zip',
+            });
+            var fs = require('fs');
+            fs.writeFileSync('${{github.workspace}}/pr.zip', Buffer.from(download.data));
+      - run: |
+          mkdir -p pr
+          unzip -d pr/ pr.zip
         with:
           ref: ${{ github.event.pull_request.head.ref }}
       - name: Setup Restyled
@@ -37,35 +89,15 @@ jobs:
           fail-on-differences: true
 
       - name: Create Restyled PR
-        if: ${{ !cancelled() && steps.restyler.outputs.success == 'true' }}
         uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412 # v7.0.9
         with:
-          base: ${{ steps.restyler.outputs.restyled-base }}
-          branch: ${{ steps.restyler.outputs.restyled-head }}
-          title: ${{ steps.restyler.outputs.restyled-title }}
-          body: ${{ steps.restyler.outputs.restyled-body }}
+          base: ${{ (fromJSON(inputs) => fromJSON(inputs.base)) (steps.read-artifacts.outputs.base) }}
+          branch: ${{ (fromJSON(inputs) => fromJSON(inputs.head)) (steps.read-artifacts.outputs.head) }}
+          title: ${{ (fromJSON(inputs) => fromJSON(inputs.title)) (steps.read-artifacts.outputs.title) }}
+          body: ${{ (fromJSON(inputs) => fromJSON(inputs.body)) (steps.read-artifacts.outputs.body) }}
           labels: "restyled"
-          reviewers: ${{ github.event.pull_request.user.login }}
+          reviewers: ${{ (fromJSON(inputs) => fromJSON(inputs.reviewer)) (steps.read-artifacts.outputs.reviewer) }}
           delete-branch: true
-
-  restyle-fork:
-    name: Restyle PR for Forks
-    if: |
-      github.event.action != 'closed' &&
-      github.event.pull_request.head.repo.full_name != github.repository
-    runs-on: ubuntu-latest
-    permissions: {}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-      - name: Setup Restyled
-        uses: restyled-io/actions/setup@e3cf32c6ab87c25a80755403de9bf92fa34ab4bb # v4.4.2
-      - name: Run Restyled
-        uses: restyled-io/actions/run@e3cf32c6ab87c25a80755403de9bf92fa34ab4bb # v4.4.2
-        with:
-          fail-on-differences: true
 
   cleanup-restyled-prs:
     name: Cleanup Restyled PRs
