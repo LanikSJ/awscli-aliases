@@ -5,17 +5,27 @@ updates:
     directory: "/"
     schedule:
       interval: daily
+      time: "09:15"
+      timezone: "America/Los_Angeles"
     open-pull-requests-limit: 10
     commit-message:
       prefix: "ci(deps)"
       prefix-development: "ci(deps-dev)"
+    labels:
+      - "dependencies"
+      - "github-actions"
 
-  # Maintain dependencies for Docker 
+  # Maintain dependencies for Docker
   - package-ecosystem: docker
     directory: "/"
     schedule:
       interval: daily
+      time: "09:15"
+      timezone: "America/Los_Angeles"
     open-pull-requests-limit: 10
     commit-message:
       prefix: "build(deps)"
       prefix-development: "build(deps-dev)"
+    labels:
+      - "dependencies"
+      - "docker"
