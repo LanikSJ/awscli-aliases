@@ -1,0 +1,47 @@
+# Cline Rules for awscli-aliases Repository
+
+## Repository Overview
+
+awscli-aliases provides convenient aliases and shortcuts for AWS CLI operations.
+
+## Code Standards and Practices
+
+### Documentation Standards
+
+- Include clear usage examples for each alias
+- Document AWS CLI version compatibility
+- Provide installation and configuration instructions
+- Use markdown formatting consistently
+
+### Markdown Compliance Requirements
+
+- **ALL markdown files (.md) MUST pass markdownlint validation with zero errors or warnings**
+- Run `markdownlint <filename>` on every markdown file before considering it complete
+- Follow the project's `.markdownlint.json` configuration strictly
+- Address ALL markdownlint issues immediately - no exceptions or workarounds
+- Common requirements include:
+  - Maximum line length of 80 characters (MD013)
+  - Consistent heading styles and hierarchy
+  - Proper list formatting and indentation
+  - Blank lines around headings and code blocks
+  - Consistent link and reference formatting
+  - No trailing whitespace
+  - Files must end with newlines
+  - Proper table formatting when applicable
+- Use `markdownlint --fix <filename>` for auto-fixable issues when available
+- Validate markdown files in CI/CD pipelines where applicable
+
+## Development Guidelines
+
+### When Making Changes
+
+- Preserve existing functionality unless explicitly asked to change it
+- Update documentation when adding new aliases
+- **Always run markdownlint and fix all issues in markdown files before considering changes complete**
+
+### AWS CLI Standards
+
+- Test aliases across different AWS CLI versions
+- Use proper error handling for AWS API calls
+- Document required AWS permissions for each alias
+- Implement safe operations that don't accidentally modify resources without confirmation
