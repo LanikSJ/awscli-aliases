@@ -2,33 +2,31 @@ name: "CodeQL Advanced"
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main", "master" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main", "master" ]
   schedule:
-    - cron: '38 16 * * 6'
+    - cron: '39 1 * * 5'
+  workflow_dispatch:
 
 jobs:
   analyze:
     name: Analyze (${{ matrix.language }})
-    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+    runs-on: ubuntu-latest
     permissions:
       security-events: write
       packages: read
       actions: read
       contents: read
-    env:
-      CODEQL_ACTION_FEATURE_MULTI_LANGUAGE: false
-      CODEQL_ACTION_FEATURE_DEFAULT_SETUP: false
     strategy:
       fail-fast: false
       matrix:
         include:
         - language: actions
           build-mode: none
-    
+
     steps:
-    - name: Checkout repository
+    - name: Checkout Repository
       uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
     - name: Initialize CodeQL
@@ -36,7 +34,18 @@ jobs:
       with:
         languages: ${{ matrix.language }}
         build-mode: ${{ matrix.build-mode }}
-        queries: security-extended
+        queries: security-extended,security-and-quality
+
+    - if: matrix.build-mode == 'manual'
+      name: Manual Build
+      shell: bash
+      run: |
+        echo 'If you are using a "manual" build mode for one or more of the' \
+          'languages you are analyzing, replace this with the commands to build' \
+          'your code, for example:'
+        echo '  make bootstrap'
+        echo '  make release'
+        exit 1
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@cf1bb45a277cb3c205638b2cd5c984db1c46a412 # v4.31.7
