@@ -1,4 +1,4 @@
-FROM amazon/aws-cli:2.32.25
+FROM amazon/aws-cli:2.32.26
 
 USER root
 RUN yum install -y shadow-utils
