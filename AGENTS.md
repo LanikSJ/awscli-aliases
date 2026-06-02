@@ -1,4 +1,4 @@
-# AI Rules & Project Standards for awscli-aliases
+# Agent Rules & Project Standards for awscli-aliases
 
 ## Repository Overview
 
