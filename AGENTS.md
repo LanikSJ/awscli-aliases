@@ -27,7 +27,7 @@ awscli-aliases provides convenient aliases and shortcuts for AWS CLI operations.
   - No trailing whitespace
   - Files must end with newlines
   - Proper table formatting when applicable
-Use `markdownlint --fix <filename>` for auto-fixable issues when available
+    Use `markdownlint --fix <filename>` for auto-fixable issues when available
 - Validate markdown files in CI/CD pipelines where applicable
 - Run `markdownlint --config .markdownlint.json "**/*.md"` to lint all markdown files in the repository
 
