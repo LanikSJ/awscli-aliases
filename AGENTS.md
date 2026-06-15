@@ -15,12 +15,11 @@ awscli-aliases provides convenient aliases and shortcuts for AWS CLI operations.
 
 ### Markdown Compliance Requirements (MANDATORY)
 
-- **ALL markdown files (.md) MUST pass markdownlint validation with zero errors or warnings**
 - Run `markdownlint <filename>` on every markdown file before considering it complete
 - Follow the project's `.markdownlint.json` configuration strictly
 - Address ALL markdownlint issues immediately - no exceptions or workarounds
 - Common requirements include:
-  - Maximum line length of 80 characters (MD013)
+  - Maximum line length of 80 characters (MD013) (overridden to 200 in .markdownlint.json)
   - Consistent heading styles and hierarchy
   - Proper list formatting and indentation
   - Blank lines around headings and code blocks
@@ -28,8 +27,42 @@ awscli-aliases provides convenient aliases and shortcuts for AWS CLI operations.
   - No trailing whitespace
   - Files must end with newlines
   - Proper table formatting when applicable
-- Use `markdownlint --fix <filename>` for auto-fixable issues when available
+    Use `markdownlint --fix <filename>` for auto-fixable issues when available
 - Validate markdown files in CI/CD pipelines where applicable
+- Run `markdownlint --config .markdownlint.json "**/*.md"` to lint all markdown files in the repository
+
+### Commit Message Convention
+
+- Use the conventional commit format: `type(scope): description`
+- Common types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `ci`
+- Commit descriptions should be a bullet list of changes made
+- Example:
+
+  ```text
+  docs(AGENTS.md): update agent rules for cloudflare-worker project
+
+  - this file had the wrong data from a totally different repository
+  ```
+
+#### Commit Types
+
+- **feat**: A new feature
+- **fix**: A bug fix
+- **alias**: A new or updated alias
+- **docs**: Documentation only changes
+- **style**: Formatting (white-space, etc)
+- **refactor**: Code change that neither fixes a bug nor adds a feature
+- **perf**: Performance improvement
+- **test**: Adding or correcting tests
+- **chore**: Changes to build process or auxiliary tools
+
+#### Scope Guidelines
+
+- **action**: main action logic
+- **docs**: documentation
+- **tests**: test-related
+- **ci**: CI/CD configuration
+- **deps**: dependency updates
 
 ## Development Guidelines
 
