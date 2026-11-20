@@ -16,7 +16,7 @@ name: Skills Update
 on:
   schedule:
     # Run every month on the 1st at 06:00 UTC
-    - cron: '0 6 1 * *'
+    - cron: "0 6 1 * *"
   workflow_dispatch: # Allow manual trigger
 
 permissions:
@@ -24,7 +24,7 @@ permissions:
 
 env:
   # Node.js version required by the skills CLI (22.20+)
-  NODE_VERSION: '22'
+  NODE_VERSION: "22"
 
 concurrency:
   group: skills-update
@@ -64,8 +64,6 @@ jobs:
           echo "resolved_commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           echo "Running npx skills update with fresh resolution..."
           npx skills update --yes
-
-
 
       - name: Check for Changes
         id: git-check
@@ -132,7 +130,7 @@ jobs:
             Updated skills based on latest versions available via npm skills update.
             This may include bug fixes, new features, or security patches.
           branch: skills/update-automated
-          title: 'chore(skills): update skills from npm skills update'
+          title: "chore(skills): update skills from npm skills update"
           body: |
             ## Skills Update
 
