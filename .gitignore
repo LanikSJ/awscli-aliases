@@ -58,3 +58,6 @@ build-iPhoneSimulator/
 
 # pycharm
 .idea
+
+# Global .agents folder (using global .agents configuration)
+.agents/
